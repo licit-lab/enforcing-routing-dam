@@ -24,3 +24,5 @@ dependencies:
   - nodejs
   - pip
   - papermill
+  - pip:
+      - https://github.com/symuvia/symupy/archive/v0.2.1.tar.gz
