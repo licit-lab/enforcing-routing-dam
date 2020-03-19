@@ -1,0 +1,26 @@
+name: isttt24
+
+channels:
+  - conda-forge
+  - pyviz
+dependencies:
+  - python=3.7
+  - jupyterlab
+  - ipykernel
+  - black
+  - pytest
+  - ipywidgets
+  - hvplot
+  - numpy
+  - bokeh
+  - pylint
+  - pandas
+  - ipympl
+  - networkx
+  - selenium
+  - phantomjs
+  - matplotlib
+  - scipy
+  - nodejs
+  - pip
+  - papermill
