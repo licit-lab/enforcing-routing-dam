@@ -1,9 +1,12 @@
+**| [Reproducibility](#reproducibility) | [Download](#download) | [Environment](#environment) | [Launch](#launch-simulations) | [License](#license) | [Contact](#contact) |**
 
-# Output 
+# Launching and Analyzing for Vanishing Policies  
 
-Results for multiple control policies and particularly vanishing output policiles
+Results for multiple control policies and particularly vanishing output policies
 
-#### Reproducibility of results  
+**Important note**: In order to reproduce specific simulations in [01_Zone_Characterisation.ipynb](01_Zone_Characterisation.ipynb) you may need an installation on *SymuVia*. Please submit an [issue](https://github.com/aladinoster/vanishing-control-out/issues/new) to provide access to the installation.
+
+## Reproducibility 
 
 In order to reproduce the environment setup the environment for reproducibility of results. 
 
@@ -13,11 +16,21 @@ In order to reproduce the environment setup the environment for reproducibility 
 
 * Al result data is stored in the folder `results/`
 
-### Environment setup
+## Download 
+
+In order to install run in your command line tool:
+
+```{bash}
+git clone https://github.com/aladinoster/vanishing-control-out.git
+```
+Or obtain direct download [here](https://github.com/aladinoster/vanishing-control-out/archive/master.zip). 
+
+
+## Environment
 
 The basic environment setup consists in installation of a minimum set of packages that will allow the reproducibility of the conditions and results. 
 
-#### Minimum requirements
+### Minimum requirements
 
 Be sure to have a version of Anaconda or download it [here](https://www.anaconda.com/distribution/). 
 
@@ -28,7 +41,7 @@ The following guidelines are meant to be executed in the terminal console:
 Open a bash terminal and execute: 
 
 ```
-$conda env create -f=environemnt.yaml
+$conda env create -f environment.yml
 ```
 #### Activate working environment
 
@@ -62,7 +75,7 @@ Look for and install the widget extension manager called `@jupyter-widgets/jupyt
  ![](images/extension-installation.png)
 
 
-#### Launch the environment and simulations
+## Launch simulations
 
 Launch the simulations via the command line or
 
@@ -78,3 +91,14 @@ Graphical interface. Be sure to select the correct environment before launching 
 Double click and open the corresponding notebook
 
 ![](images/notebook.png)
+
+**Note**: In case you are working with the dynamic evolution presented in[01_Zone_Characterisation.ipynb](01_Zone_Characterisation.ipynb). Double check the path where the library of SymuVia is located. Edit the variable `PATH_SYMUVIA` with your local installation. 
+
+
+## License 
+
+The code here contained is licensed under [MIT](LICENSE) license.
+
+## Contact 
+
+If you run into problems or bugs, please let us know by [creating an issue](https://ci.tno.nl/gitlab/paco.hamers-tno/ensemble_drivermodel/issues/new) an issue in this repository.
