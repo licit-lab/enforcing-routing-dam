@@ -21,9 +21,9 @@ CTR = ("MANUAL",)
 Z = ("Cpt_5",)
 D = (50,)
 
-# cases = product(PRB, CTR, Z, D)
+cases = product(PRB, CTR, Z, D)
 # for case in cases:
-#     print(case)
+#     print(case)gt
 
 # ======================================================================================================================
 # Runtime
