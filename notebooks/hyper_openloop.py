@@ -16,14 +16,14 @@ from itertools import product
 # Contants
 # ======================================================================================================================
 
-PRB = (0.0, 0.1, 0.2, 0.3, 0.5, 0.6, 0.7, 0.8, 0.9)
+PRB = (0.0, 0.1, 0.2, 0.3, 0.5, 0.7)
 CTR = ("MANUAL",)
 Z = ("Cpt_5",)
 D = (50,)
 
-cases = product(PRB, CTR, Z,D)
-for case in cases: 
-    print(case)
+# cases = product(PRB, CTR, Z, D)
+# for case in cases:
+#     print(case)
 
 # ======================================================================================================================
 # Runtime
@@ -35,5 +35,5 @@ for case in cases:
     pm.execute_notebook(
         "01_Zone_Characterisation.ipynb",
         "01_Zone_Characterisation.ipynb",
-        parameters=dict(VANISHING=pvan, CONTROL_TYPE=ctr_type, ZONE=zone, DISTANCE_CONTROL = dst),
+        parameters=dict(VANISHING=pvan, CONTROL_TYPE=ctr_type, ZONE=zone, DISTANCE_CONTROL=dst),
     )
