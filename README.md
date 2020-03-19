@@ -2,6 +2,8 @@
 
 # Launching and Analyzing for Vanishing Policies  
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/aladinoster/vanishing-control-out.git/master?filepath=notebooks)
+
 Results for multiple control policies and particularly vanishing output policies
 
 <div style="text-align:center"><img src="images/zones.png" alt="drawing" width="400"/></div>
