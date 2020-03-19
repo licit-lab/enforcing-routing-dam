@@ -4,6 +4,8 @@
 
 Results for multiple control policies and particularly vanishing output policies
 
+<div style="text-align:center"><img src="images/zones.png" alt="drawing" width="400"/></div>
+
 **Important note**: In order to reproduce specific simulations in [01_Zone_Characterisation.ipynb](01_Zone_Characterisation.ipynb) you may need an installation on *SymuVia*. Please submit an [issue](https://github.com/aladinoster/vanishing-control-out/issues/new) to provide access to the installation.
 
 ## Reproducibility 
