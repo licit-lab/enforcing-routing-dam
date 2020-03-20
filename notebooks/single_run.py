@@ -59,9 +59,7 @@ for pck in packages:
 
 # %%
 # Path information
-PATH_SYMUVIA = (
-    "/Users/andresladino/Documents/01-Code/04-Platforms/build-symuvia/build/SymuVia/libSymuVia.dylib"  # Laptop
-)
+PATH_SYMUVIA = "/Users/andresladino/Documents/01-Code/04-Platforms/dev-symuvia/build/SymuVia/libSymuVia.dylib"  # Laptop
 # PATH_SYMUVIA = '/Users/ladino/Documents/01-Platforms/01-Symuvia/06-Source/01-VanishingZones/build/SymuVia/libSymuVia.dylib' # Office
 
 PATH_SCENARIO = os.getcwd() + "/../data/scenarios/mesh9x9/net1_nodemand_9zones2.xml"  # Laptop
