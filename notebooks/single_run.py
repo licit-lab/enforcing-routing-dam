@@ -24,6 +24,7 @@ ZONE = "Cpt_5"
 VANISHING = 0.4
 CONTROL_TYPE = "MANUAL"
 DISTANCE_CONTROL = 50
+TRIGGER_TIME = 9000
 
 
 # %%
@@ -59,7 +60,7 @@ for pck in packages:
 
 # %%
 # Path information
-PATH_SYMUVIA = "/Users/andresladino/Documents/01-Code/04-Platforms/dev-symuvia/build/SymuVia/libSymuVia.dylib"  # Laptop
+PATH_SYMUVIA = "/Users/andresladino/Documents/01-Code/04-Platforms/dev-symuvia/build/lib/libSymuVia.dylib"  # Laptop
 # PATH_SYMUVIA = '/Users/ladino/Documents/01-Platforms/01-Symuvia/06-Source/01-VanishingZones/build/SymuVia/libSymuVia.dylib' # Office
 
 PATH_SCENARIO = os.getcwd() + "/../data/scenarios/mesh9x9/net1_nodemand_9zones2.xml"  # Laptop
@@ -223,7 +224,6 @@ state_A = dict(zip(sensors, repeat(0)))
 state_B = dict(zip(sensors, repeat(0)))
 state_B[ZONE] = VANISHING
 
-TRIGGER_TIME = 9000
 
 if CONTROL_TYPE == "MANUAL":
     compute_control = lambda time, threshold, speed, graph: state_B if time > threshold else state_A
@@ -256,18 +256,34 @@ control_interval = 180  # seconds
 
 
 vehids = []
-
+cum_veh = []
 with simulator as s:
     #     progress.value = 0
     while s.do_next:
         s.run_step()
 
         # Vehicle creation on demand
-        for veh_data in extract_veh_data(demand, s.time_step):
-            vehid = s.create_vehicle_with_route(*veh_data)
-            vehids.append(vehid)
+        if s.simulationstep > 0:
+            for veh_data in extract_veh_data(demand, s.simulationstep):
+                vehid = s.create_vehicle_with_route(*veh_data)
+                vehids.append(vehid)
 
-        if not s.simulationstep % control_interval and s.simulationstep > 0:
+        if s.simulationstep == control_interval:
+            control_rate = state_A
+            CTR.append(control_rate)
+            s.add_control_probability_zone_mfd(control_rate, dstcontrol)
+
+        if not s.simulationstep % control_interval and s.simulationstep >= control_interval:
+            # Control
+            new_vehs = [v for v in vehids if v not in cum_veh and v > 0]
+            fail_vehs = [v for v in vehids if v not in cum_veh and v < 0]
+            print(
+                f"Time: {s.simulationstep},New vehs: {len(new_vehs)}, Failed vehs:{len(fail_vehs)}, Total vehs:{len(vehids)}"
+            )
+
+            # Store new vehicles
+            cum_veh = [v for v in vehids]
+
             #             progress.value += 1
             TTD.append(dict(zip(sensors, s.get_total_travel_distance())))
             TTT.append(dict(zip(sensors, s.get_total_travel_time())))
@@ -278,11 +294,6 @@ with simulator as s:
             print(control_rate)
 
             s.modify_control_probability_zone_mfd(control_rate)
-
-        if s.simulationstep == 0:
-            control_rate = state_A
-            CTR.append(control_rate)
-            s.add_control_probability_zone_mfd(control_rate, dstcontrol)
 
 
 # %%
