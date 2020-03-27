@@ -260,20 +260,21 @@ cum_veh = []
 with simulator as s:
     #     progress.value = 0
     while s.do_next:
-        s.run_step()
 
-        # Vehicle creation on demand
+        # Vehicle Creation on demand
         if s.simulationstep > 0:
             for veh_data in extract_veh_data(demand, s.simulationstep):
                 vehid = s.create_vehicle_with_route(*veh_data)
                 vehids.append(vehid)
 
+        # Declare Zone Control
         if s.simulationstep == control_interval:
-            control_rate = state_A
+            control_rate = compute_control(s.simulationstep, TRIGGER_TIME, SPD, G)
             CTR.append(control_rate)
             s.add_control_probability_zone_mfd(control_rate, dstcontrol)
 
-        if not s.simulationstep % control_interval and s.simulationstep >= control_interval:
+        # Modify Zone Control
+        if not s.simulationstep % control_interval and s.simulationstep > control_interval:
             # Control
             new_vehs = [v for v in vehids if v not in cum_veh and v > 0]
             fail_vehs = [v for v in vehids if v not in cum_veh and v < 0]
@@ -289,12 +290,12 @@ with simulator as s:
             TTT.append(dict(zip(sensors, s.get_total_travel_time())))
             SPD.append(dict(zip(sensors, s.get_mfd_speed())))
 
-            control_rate = compute_control(s.simulationstep, TRIGGER_TIME, SPD[-1], G)
+            control_rate = compute_control(s.simulationstep, TRIGGER_TIME, SPD, G)
             CTR.append(control_rate)
-            print(control_rate)
 
             s.modify_control_probability_zone_mfd(control_rate)
 
+        s.run_step()
 
 # %%
 # Save files
