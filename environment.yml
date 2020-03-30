@@ -22,6 +22,7 @@ dependencies:
   - matplotlib
   - scipy
   - nodejs
+  - voila
   - pip
   - papermill
   - pip:
