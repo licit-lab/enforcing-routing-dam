@@ -2,7 +2,7 @@
 
 # Launching and Analyzing for Vanishing Policies  
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/aladinoster/vanishing-control-out.git/master?filepath=notebooks)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/aladinoster/vanishing-control-out/master?urlpath=voila%2Frender%2Fnotebooks%2F02_Outcome_analysis.ipynb)
 
 Results for multiple control policies and particularly vanishing output policies
 
