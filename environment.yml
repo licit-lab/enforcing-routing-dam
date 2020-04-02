@@ -3,6 +3,7 @@ name: isttt24
 channels:
   - conda-forge
   - pyviz
+  - anaconda
 dependencies:
   - python=3.7
   - jupyterlab
@@ -20,6 +21,7 @@ dependencies:
   - selenium
   - phantomjs
   - matplotlib
+  - seaborn
   - scipy
   - nodejs
   - voila
