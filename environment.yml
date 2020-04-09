@@ -28,4 +28,4 @@ dependencies:
   - pip
   - papermill
   - pip:
-      - https://github.com/symuvia/symupy/archive/v0.2.3.tar.gz
+      - https://github.com/symuvia/symupy/archive/v0.2.4.tar.gz
