@@ -1,0 +1,856 @@
+29/4/2020
+9:9:39
+
+seed : 1 ok
+Writing .txt files
+
+---- Realized travel time for every itinerary ---
+ Vehicle type : VL
+ Origin : E_EO_0
+ Origin : E_EO_1
+ Origin : E_EO_10
+ Origin : E_EO_11
+ Origin : E_EO_12
+ Origin : E_EO_13
+ Origin : E_EO_14
+ Origin : E_EO_15
+ Origin : E_EO_16
+ Origin : E_EO_17
+ Origin : E_EO_18
+ Origin : E_EO_19
+ Origin : E_EO_2
+ Origin : E_EO_20
+ Origin : E_EO_21
+ Origin : E_EO_22
+ Origin : E_EO_23
+ Origin : E_EO_24
+ Origin : E_EO_25
+ Origin : E_EO_26
+ Origin : E_EO_27
+ Origin : E_EO_28
+ Origin : E_EO_3
+ Origin : E_EO_4
+ Origin : E_EO_5
+ Origin : E_EO_6
+ Origin : E_EO_7
+ Origin : E_EO_8
+ Origin : E_EO_9
+ Origin : E_NS_0
+ Origin : E_NS_1
+ Origin : E_NS_10
+ Origin : E_NS_11
+ Origin : E_NS_12
+ Origin : E_NS_13
+ Origin : E_NS_14
+ Origin : E_NS_15
+ Origin : E_NS_16
+ Origin : E_NS_17
+ Origin : E_NS_18
+ Origin : E_NS_19
+ Origin : E_NS_2
+ Origin : E_NS_20
+ Origin : E_NS_21
+ Origin : E_NS_22
+ Origin : E_NS_23
+ Origin : E_NS_24
+ Origin : E_NS_25
+ Origin : E_NS_26
+ Origin : E_NS_27
+ Origin : E_NS_28
+ Origin : E_NS_3
+ Origin : E_NS_4
+ Origin : E_NS_5
+ Origin : E_NS_6
+ Origin : E_NS_7
+ Origin : E_NS_8
+ Origin : E_NS_9
+ Origin : E_OE_0
+ Origin : E_OE_1
+ Origin : E_OE_10
+ Origin : E_OE_11
+ Origin : E_OE_12
+ Origin : E_OE_13
+ Origin : E_OE_14
+ Origin : E_OE_15
+ Origin : E_OE_16
+ Origin : E_OE_17
+ Origin : E_OE_18
+ Origin : E_OE_19
+ Origin : E_OE_2
+ Origin : E_OE_20
+ Origin : E_OE_21
+ Origin : E_OE_22
+ Origin : E_OE_23
+ Origin : E_OE_24
+ Origin : E_OE_25
+ Origin : E_OE_26
+ Origin : E_OE_27
+ Origin : E_OE_28
+ Origin : E_OE_3
+ Origin : E_OE_4
+ Origin : E_OE_5
+ Origin : E_OE_6
+ Origin : E_OE_7
+ Origin : E_OE_8
+ Origin : E_OE_9
+ Origin : E_SN_0
+ Origin : E_SN_1
+ Origin : E_SN_10
+ Origin : E_SN_11
+ Origin : E_SN_12
+ Origin : E_SN_13
+ Origin : E_SN_14
+ Origin : E_SN_15
+ Origin : E_SN_16
+ Origin : E_SN_17
+ Origin : E_SN_18
+ Origin : E_SN_19
+ Origin : E_SN_2
+ Origin : E_SN_20
+ Origin : E_SN_21
+ Origin : E_SN_22
+ Origin : E_SN_23
+ Origin : E_SN_24
+ Origin : E_SN_25
+ Origin : E_SN_26
+ Origin : E_SN_27
+ Origin : E_SN_28
+ Origin : E_SN_3
+ Origin : E_SN_4
+ Origin : E_SN_5
+ Origin : E_SN_6
+ Origin : E_SN_7
+ Origin : E_SN_8
+ Origin : E_SN_9
+
+Studied vehicle type : VL
+
+Vehicle type ignored.
+Assignment computation duration : 0.272516 s
+
+
+Instant : 1
+Instant : 2
+Instant : 3
+Instant : 4
+Instant : 5
+Instant : 6
+Instant : 7
+Instant : 8
+Instant : 9
+Instant : 10
+Instant : 11
+Instant : 12
+Instant : 13
+Instant : 14
+Instant : 15
+Instant : 16
+Instant : 17
+Instant : 18
+Instant : 19
+Instant : 20
+Instant : 21
+Instant : 22
+Instant : 23
+Instant : 24
+Instant : 25
+Instant : 26
+Instant : 27
+Instant : 28
+Instant : 29
+Instant : 30
+Instant : 31
+Instant : 32
+Instant : 33
+Instant : 34
+Instant : 35
+Instant : 36
+Instant : 37
+Instant : 38
+Instant : 39
+Instant : 40
+Instant : 41
+Instant : 42
+Instant : 43
+Instant : 44
+Instant : 45
+Instant : 46
+Instant : 47
+Instant : 48
+Instant : 49
+Instant : 50
+Instant : 51
+Instant : 52
+Instant : 53
+Instant : 54
+Instant : 55
+Instant : 56
+Instant : 57
+Instant : 58
+Instant : 59
+Instant : 60
+Instant : 61
+Instant : 62
+Instant : 63
+Instant : 64
+Instant : 65
+Instant : 66
+Instant : 67
+Instant : 68
+Instant : 69
+Instant : 70
+Instant : 71
+Instant : 72
+Instant : 73
+Instant : 74
+Instant : 75
+Instant : 76
+Instant : 77
+Instant : 78
+Instant : 79
+Instant : 80
+Instant : 81
+Instant : 82
+Instant : 83
+Instant : 84
+Instant : 85
+Instant : 86
+Instant : 87
+Instant : 88
+Instant : 89
+Instant : 90
+Instant : 91
+Instant : 92
+Instant : 93
+Instant : 94
+Instant : 95
+Instant : 96
+Instant : 97
+Instant : 98
+Instant : 99
+Instant : 100
+Instant : 101
+Instant : 102
+Instant : 103
+Instant : 104
+Instant : 105
+Instant : 106
+Instant : 107
+Instant : 108
+Instant : 109
+Instant : 110
+Instant : 111
+Instant : 112
+Instant : 113
+Instant : 114
+Instant : 115
+Instant : 116
+Instant : 117
+Instant : 118
+Instant : 119
+Instant : 120
+Instant : 121
+Instant : 122
+Instant : 123
+Instant : 124
+Instant : 125
+Instant : 126
+Instant : 127
+Instant : 128
+Instant : 129
+Instant : 130
+Instant : 131
+Instant : 132
+Instant : 133
+Instant : 134
+Instant : 135
+Instant : 136
+Instant : 137
+Instant : 138
+Instant : 139
+Instant : 140
+Instant : 141
+Instant : 142
+Instant : 143
+Instant : 144
+Instant : 145
+Instant : 146
+Instant : 147
+Instant : 148
+Instant : 149
+Instant : 150
+Instant : 151
+Instant : 152
+Instant : 153
+Instant : 154
+Instant : 155
+Instant : 156
+Instant : 157
+Instant : 158
+Instant : 159
+Instant : 160
+Instant : 161
+Instant : 162
+Instant : 163
+Instant : 164
+Instant : 165
+Instant : 166
+Instant : 167
+Instant : 168
+Instant : 169
+Instant : 170
+Instant : 171
+Instant : 172
+Instant : 173
+Instant : 174
+Instant : 175
+Instant : 176
+Instant : 177
+Instant : 178
+Instant : 179
+Instant : 180
+Instant : 181
+Instant : 182
+Instant : 183
+Instant : 184
+Instant : 185
+Instant : 186
+Instant : 187
+Instant : 188
+Instant : 189
+Instant : 190
+Instant : 191
+Instant : 192
+Instant : 193
+Instant : 194
+Instant : 195
+Instant : 196
+Instant : 197
+Instant : 198
+Instant : 199
+Instant : 200
+Instant : 201
+Instant : 202
+Instant : 203
+Instant : 204
+Instant : 205
+Instant : 206
+Instant : 207
+Instant : 208
+Instant : 209
+Instant : 210
+Instant : 211
+Instant : 212
+Instant : 213
+Instant : 214
+Instant : 215
+Instant : 216
+Instant : 217
+Instant : 218
+Instant : 219
+Instant : 220
+Instant : 221
+Instant : 222
+Instant : 223
+Instant : 224
+Instant : 225
+Instant : 226
+Instant : 227
+Instant : 228
+Instant : 229
+Instant : 230
+Instant : 231
+Instant : 232
+Instant : 233
+Instant : 234
+Instant : 235
+Instant : 236
+Instant : 237
+Instant : 238
+Instant : 239
+Instant : 240
+Instant : 241
+Instant : 242
+Instant : 243
+Instant : 244
+Instant : 245
+Instant : 246
+Instant : 247
+Instant : 248
+Instant : 249
+Instant : 250
+Instant : 251
+Instant : 252
+Instant : 253
+Instant : 254
+Instant : 255
+Instant : 256
+Instant : 257
+Instant : 258
+Instant : 259
+Instant : 260
+Instant : 261
+Instant : 262
+Instant : 263
+Instant : 264
+Instant : 265
+Instant : 266
+Instant : 267
+Instant : 268
+Instant : 269
+Instant : 270
+Instant : 271
+Instant : 272
+Instant : 273
+Instant : 274
+Instant : 275
+Instant : 276
+Instant : 277
+Instant : 278
+Instant : 279
+Instant : 280
+Instant : 281
+Instant : 282
+Instant : 283
+Instant : 284
+Instant : 285
+Instant : 286
+Instant : 287
+Instant : 288
+Instant : 289
+Instant : 290
+Instant : 291
+Instant : 292
+Instant : 293
+Instant : 294
+Instant : 295
+Instant : 296
+Instant : 297
+Instant : 298
+Instant : 299
+Instant : 300
+Instant : 301
+Instant : 302
+Instant : 303
+Instant : 304
+Instant : 305
+Instant : 306
+Instant : 307
+Instant : 308
+Instant : 309
+Instant : 310
+Instant : 311
+Instant : 312
+Instant : 313
+Instant : 314
+Instant : 315
+Instant : 316
+Instant : 317
+Instant : 318
+Instant : 319
+Instant : 320
+Instant : 321
+Instant : 322
+Instant : 323
+Instant : 324
+Instant : 325
+Instant : 326
+Instant : 327
+Instant : 328
+Instant : 329
+Instant : 330
+Instant : 331
+Instant : 332
+Instant : 333
+Instant : 334
+Instant : 335
+Instant : 336
+Instant : 337
+Instant : 338
+Instant : 339
+Instant : 340
+Instant : 341
+Instant : 342
+Instant : 343
+Instant : 344
+Instant : 345
+Instant : 346
+Instant : 347
+Instant : 348
+Instant : 349
+Instant : 350
+Instant : 351
+Instant : 352
+Instant : 353
+Instant : 354
+Instant : 355
+Instant : 356
+Instant : 357
+Instant : 358
+Instant : 359
+Instant : 360
+Instant : 361
+Instant : 362
+Instant : 363
+Instant : 364
+Instant : 365
+Instant : 366
+Instant : 367
+Instant : 368
+Instant : 369
+Instant : 370
+Instant : 371
+Instant : 372
+Instant : 373
+Instant : 374
+Instant : 375
+Instant : 376
+Instant : 377
+Instant : 378
+Instant : 379
+Instant : 380
+Instant : 381
+Instant : 382
+Instant : 383
+Instant : 384
+Instant : 385
+Instant : 386
+Instant : 387
+Instant : 388
+Instant : 389
+Instant : 390
+Instant : 391
+Instant : 392
+Instant : 393
+Instant : 394
+Instant : 395
+Instant : 396
+Instant : 397
+Instant : 398
+Instant : 399
+Instant : 400
+Instant : 401
+Instant : 402
+Instant : 403
+Instant : 404
+Instant : 405
+Instant : 406
+Instant : 407
+Instant : 408
+Instant : 409
+Instant : 410
+Instant : 411
+Instant : 412
+Instant : 413
+Instant : 414
+Instant : 415
+Instant : 416
+Instant : 417
+Instant : 418
+Instant : 419
+Instant : 420
+Instant : 421
+Instant : 422
+Instant : 423
+Instant : 424
+Instant : 425
+Instant : 426
+Instant : 427
+Instant : 428
+Instant : 429
+Instant : 430
+Instant : 431
+Instant : 432
+Instant : 433
+Instant : 434
+Instant : 435
+Instant : 436
+Instant : 437
+Instant : 438
+Instant : 439
+Instant : 440
+Instant : 441
+Instant : 442
+Instant : 443
+Instant : 444
+Instant : 445
+Instant : 446
+Instant : 447
+Instant : 448
+Instant : 449
+Instant : 450
+Instant : 451
+Instant : 452
+Instant : 453
+Instant : 454
+Instant : 455
+Instant : 456
+Instant : 457
+Instant : 458
+Instant : 459
+Instant : 460
+Instant : 461
+Instant : 462
+Instant : 463
+Instant : 464
+Instant : 465
+Instant : 466
+Instant : 467
+Instant : 468
+Instant : 469
+Instant : 470
+Instant : 471
+Instant : 472
+Instant : 473
+Instant : 474
+Instant : 475
+Instant : 476
+Instant : 477
+Instant : 478
+Instant : 479
+Instant : 480
+Instant : 481
+Instant : 482
+Instant : 483
+Instant : 484
+Instant : 485
+Instant : 486
+Instant : 487
+Instant : 488
+Instant : 489
+Instant : 490
+Instant : 491
+Instant : 492
+Instant : 493
+Instant : 494
+Instant : 495
+Instant : 496
+Instant : 497
+Instant : 498
+Instant : 499
+Instant : 500
+Instant : 501
+Instant : 502
+Instant : 503
+Instant : 504
+Instant : 505
+Instant : 506
+Instant : 507
+Instant : 508
+Instant : 509
+Instant : 510
+Instant : 511
+Instant : 512
+Instant : 513
+Instant : 514
+Instant : 515
+Instant : 516
+Instant : 517
+Instant : 518
+Instant : 519
+Instant : 520
+Instant : 521
+Instant : 522
+Instant : 523
+Instant : 524
+Instant : 525
+Instant : 526
+Instant : 527
+Instant : 528
+Instant : 529
+Instant : 530
+Instant : 531
+Instant : 532
+Instant : 533
+Instant : 534
+Instant : 535
+Instant : 536
+Instant : 537
+Instant : 538
+Instant : 539
+Instant : 540
+Instant : 541
+Instant : 542
+Instant : 543
+Instant : 544
+Instant : 545
+Instant : 546
+Instant : 547
+Instant : 548
+Instant : 549
+Instant : 550
+Instant : 551
+Instant : 552
+Instant : 553
+Instant : 554
+Instant : 555
+Instant : 556
+Instant : 557
+Instant : 558
+Instant : 559
+Instant : 560
+Instant : 561
+Instant : 562
+Instant : 563
+Instant : 564
+Instant : 565
+Instant : 566
+Instant : 567
+Instant : 568
+Instant : 569
+Instant : 570
+Instant : 571
+Instant : 572
+Instant : 573
+Instant : 574
+Instant : 575
+Instant : 576
+Instant : 577
+Instant : 578
+Instant : 579
+Instant : 580
+Instant : 581
+Instant : 582
+Instant : 583
+Instant : 584
+Instant : 585
+Instant : 586
+Instant : 587
+Instant : 588
+Instant : 589
+Instant : 590
+Instant : 591
+Instant : 592
+Instant : 593
+Instant : 594
+Instant : 595
+Instant : 596
+Instant : 597
+Instant : 598
+Instant : 599
+Instant : 600
+Instant : 601
+Instant : 602
+Instant : 603
+Instant : 604
+Instant : 605
+Instant : 606
+Instant : 607
+Instant : 608
+Instant : 609
+Instant : 610
+Instant : 611
+Instant : 612
+Instant : 613
+Instant : 614
+Instant : 615
+Instant : 616
+Instant : 617
+Instant : 618
+Instant : 619
+Instant : 620
+Instant : 621
+Instant : 622
+Instant : 623
+Instant : 624
+Instant : 625
+Instant : 626
+Instant : 627
+Instant : 628
+Instant : 629
+Instant : 630
+Instant : 631
+Instant : 632
+Instant : 633
+Instant : 634
+Instant : 635
+Instant : 636
+Instant : 637
+Instant : 638
+Instant : 639
+Instant : 640
+Instant : 641
+Instant : 642
+Instant : 643
+Instant : 644
+Instant : 645
+Instant : 646
+Instant : 647
+Instant : 648
+Instant : 649
+Instant : 650
+Instant : 651
+Instant : 652
+Instant : 653
+Instant : 654
+Instant : 655
+Instant : 656
+Instant : 657
+Instant : 658
+Instant : 659
+Instant : 660
+Instant : 661
+Instant : 662
+Instant : 663
+Instant : 664
+Instant : 665
+Instant : 666
+Instant : 667
+Instant : 668
+Instant : 669
+Instant : 670
+Instant : 671
+Instant : 672
+Instant : 673
+Instant : 674
+Instant : 675
+Instant : 676
+Instant : 677
+Instant : 678
+Instant : 679
+Instant : 680
+Instant : 681
+Instant : 682
+Instant : 683
+Instant : 684
+Instant : 685
+Instant : 686
+Instant : 687
+Instant : 688
+Instant : 689
+Instant : 690
+Instant : 691
+Instant : 692
+Instant : 693
+Instant : 694
+Instant : 695
+Instant : 696
+Instant : 697
+Instant : 698
+Instant : 699
+Instant : 700
+Instant : 701
+Instant : 702
+Instant : 703
+Instant : 704
+Instant : 705
+Instant : 706
+Instant : 707
+Instant : 708
+Instant : 709
+Instant : 710
+Instant : 711
+Instant : 712
+Instant : 713
+Instant : 714
+Instant : 715
+Instant : 716
+Instant : 717
+Instant : 718
+Instant : 719
+Instant : 720
+Cumulated number of vehicles on the network for all time steps 652059
+9:18:25
+
+Traffic flow computation duration : 332.995 s
+
