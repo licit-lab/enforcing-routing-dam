@@ -18,13 +18,15 @@ apt-get update --fix-missing && \
     /opt/conda/bin/conda clean -afy
 
 # Install dependencies symuvia
-apt-get update && apt-get install -y \
+add-apt-repository universe && apt-get update && apt-get install -y \
     wget bzip2 ca-certificates \
     xz-utils \
     build-essential \
     curl \
     nano \
-    xqilla \
+    screen \
+    rsync \
+    xqilla-dev \
     libboost-all-dev \
     aptitude \
     gdal-bin \
