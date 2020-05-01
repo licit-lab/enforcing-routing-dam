@@ -10,13 +10,13 @@
 # ======================================================================================================================
 
 import papermill as pm
-from itertools import product
+from itertools import product, chain
 
 # ======================================================================================================================
 # Contants
 # ======================================================================================================================
 
-# Parameters
+# Setup 1
 EXPERIMENT = ("CTR",)
 CASE = (
     "CO_P",
@@ -40,7 +40,7 @@ CO_TWD = (300,)
 
 # General Parameters
 
-cases = product(
+cases_ctr = product(
     EXPERIMENT,
     CASE,
     CONTROL_TYPE,
@@ -57,6 +57,31 @@ cases = product(
     CO_TI,
     CO_TWD,
 )
+
+# Setup 2
+CASE = ("PI",)
+CONTROL_TYPE = ("OPENL",)
+
+case_ol = product(
+    EXPERIMENT,
+    CASE,
+    CONTROL_TYPE,
+    DISTANCE_CONTROL,
+    TRIGGER_TIME,
+    SELFISH,
+    PATH_SYMUVIA,
+    SCENARIO,
+    ZONES,
+    FILE,
+    DEMAND_FILE,
+    REF_SPEED,
+    CO_KP,
+    CO_TI,
+    CO_TWD,
+)
+
+cases = chain(cases_ctr, case_ol)
+
 
 keys = (
     "EXPERIMENT",
