@@ -9,6 +9,6 @@ do
    -p PATH_SYMUVIA ${PATH_SYMUVIA} -p CONTROL_TYPE ${case} &
    else
        papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}.ipynb \
-   -p CASE ${case} -p PATH_SYMUVIA ${PATH_SYMUVIA} &
+   -p CASE ${case} -p PATH_SYMUVIA ${PATH_SYMUVIA} -p CO_TI 600&
    fi
 done
