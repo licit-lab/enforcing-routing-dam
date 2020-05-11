@@ -33,6 +33,6 @@ do
     -p FILE "symuvia_network_9zones.xml" \
     -p SCENARIO "mesh9x9/" \
     -p ZONES "9zones/" \
-    -p REF_SPEED "ref_speeds_9zones.csv" &"
+    -p REF_SPEED "ref_speeds_9zones.csv" &
    fi
 done
