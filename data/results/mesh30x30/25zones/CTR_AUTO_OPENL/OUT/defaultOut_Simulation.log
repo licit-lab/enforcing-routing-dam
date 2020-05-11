@@ -1,5 +1,5 @@
-9/5/2020
-21:49:3
+10/5/2020
+16:48:52
 
 seed : 1 ok
 Writing .txt files
@@ -126,7 +126,7 @@ Writing .txt files
 Studied vehicle type : VL
 
 Vehicle type ignored.
-Assignment computation duration : 0.421974 s
+Assignment computation duration : 0.462997 s
 
 
 Instant : 1
@@ -490,7 +490,7 @@ Instant : 358
 Instant : 359
 Instant : 360
 Cumulated number of vehicles on the network for all time steps 159100
-21:51:17
+16:51:7
 
-Traffic flow computation duration : 118.41 s
+Traffic flow computation duration : 118.874 s
 
