@@ -18,7 +18,7 @@ do
     -p CONTROL_TYPE ${case} \
     -p SCENARIO "mesh9x9/" \
     -p ZONES "9zones/" \
-    -p REF_SPEED "ref_speeds_9zones.#csv" &
+    -p REF_SPEED "ref_speeds_9zones.csv" &
    else
     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}.ipynb \
     -p CASE ${case} \
