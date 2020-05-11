@@ -16,6 +16,8 @@ do
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
     -p CONTROL_TYPE ${case} \
     -p FILE "symuvia_network_9zones.xml" \
+    -p NRow 3 \
+    -p NCol 3 \
     -p SCENARIO "mesh9x9/" \
     -p ZONES "9zones/" \
     -p REF_SPEED "ref_speeds_9zones.csv" &
@@ -31,6 +33,8 @@ do
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
     -p CASE ${case} \
     -p FILE "symuvia_network_9zones.xml" \
+    -p NRow 3 \
+    -p NCol 3 \
     -p SCENARIO "mesh9x9/" \
     -p ZONES "9zones/" \
     -p REF_SPEED "ref_speeds_9zones.csv" &
