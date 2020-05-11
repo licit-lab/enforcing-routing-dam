@@ -15,7 +15,7 @@ do
     papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
     -p FILE "symuvia_network_9zones.xml" \
-    -p #CONTROL_TYPE ${case} \
+    -p CONTROL_TYPE ${case} \
     -p SCENARIO "mesh9x9/" \
     -p ZONES "9zones/" \
     -p REF_SPEED "ref_speeds_9zones.#csv" &
