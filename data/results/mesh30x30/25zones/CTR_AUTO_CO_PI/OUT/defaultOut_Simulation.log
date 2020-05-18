@@ -16004,3 +16004,31 @@ Instant : 8731
 Instant : 8732
 Instant : 8733
 Instant : 8734
+Instant : 8735
+Instant : 8736
+Instant : 8737
+Instant : 8738
+Instant : 8739
+Instant : 8740
+Instant : 8741
+Instant : 8742
+Instant : 8743
+Instant : 8744
+Instant : 8745
+Instant : 8746
+Instant : 8747
+Instant : 8748
+Instant : 8749
+Instant : 8750
+Instant : 8751
+Instant : 8752
+[8752s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 2423). Using estimated car following to break the loop.
+Instant : 8753
+Instant : 8754
+Instant : 8755
+Instant : 8756
+Instant : 8757
+Instant : 8758
+[8758s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 2423). Using estimated car following to break the loop.
+Instant : 8759
+[8759s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 2423). Using estimated car following to break the loop.
