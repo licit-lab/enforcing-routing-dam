@@ -23899,3 +23899,80 @@ Instant : 16016
 Instant : 16017
 Instant : 16018
 Instant : 16019
+Instant : 16020
+Instant : 16021
+[16021s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 31774). Using estimated car following to break the loop.
+Instant : 16022
+Instant : 16023
+Instant : 16024
+Instant : 16025
+Instant : 16026
+[16026s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16027
+[16027s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16028
+[16028s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16029
+[16029s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16030
+[16030s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16031
+[16031s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16032
+[16032s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16033
+[16033s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16034
+[16034s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 51063). Using estimated car following to break the loop.
+[16034s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+[16034s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 31774). Using estimated car following to break the loop.
+Instant : 16035
+[16035s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 51063). Using estimated car following to break the loop.
+[16035s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+[16035s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 31774). Using estimated car following to break the loop.
+Instant : 16036
+[16036s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+[16036s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 31774). Using estimated car following to break the loop.
+Instant : 16037
+[16037s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+[16037s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 31774). Using estimated car following to break the loop.
+Instant : 16038
+[16038s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16039
+[16039s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16040
+[16040s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16041
+[16041s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 45433). Using estimated car following to break the loop.
+[16041s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16042
+[16042s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 45433). Using estimated car following to break the loop.
+[16042s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16043
+[16043s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 45433). Using estimated car following to break the loop.
+[16043s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16044
+[16044s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16045
+[16045s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16046
+[16046s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16047
+[16047s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16048
+[16048s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16049
+[16049s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16050
+[16050s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16051
+[16051s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16052
+[16052s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16053
+[16053s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16054
+[16054s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16055
+[16055s] Infinite loop detected (recursive call to Vehicule::CalculTraficEx() for vehicle 29068). Using estimated car following to break the loop.
+Instant : 16056
