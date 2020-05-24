@@ -125,6 +125,8 @@ def plot_variable_cases(
     """ 
         Plots data for a specfic variable and multiple cases 
     """
+    dct_var = {"spd": "Speed", "ctr": "Control", "ttt": "Total Travel Time", "ttd": "Total Travel Distance"}
+
     df_lst = []
     for case in cases:
         df = pd.read_csv(file_path + "/" + case + "/" + variable + ".csv")
@@ -151,8 +153,28 @@ def plot_variable_cases(
             print(i)
             a.set_axis_off()
 
-    plt.tight_layout()
-    return dftot
+    fig.suptitle(dct_var.get(variable, ""))
+    fig.tight_layout()
+    fig.subplots_adjust(top=0.95)
+
+    fig, a = plt.subplots()
+    if variable != "ctr":
+        dfg_lst = []
+        for case in cases:
+            dfg = pd.read_csv(file_path + "/" + case + "/" + variable + "G" + ".csv")
+            dfg_lst.append(dfg)
+
+        dfgtot = pd.concat(dfg_lst, keys=tags)
+        dfgtot = dfgtot.reset_index(level=0).rename(columns={"level_0": "Strategy"})
+        dfgtot = dfgtot.pivot(columns="Strategy")
+
+        dfgtot.plot(ax=a, grid=True, title=dct_var.get(variable, ""))
+        a.yaxis.set_major_formatter(ticker.FuncFormatter(human_format))
+
+    else:
+        dfgtot = []
+
+    return dftot, dfgtot
 
 
 def plot_routing_activations(
