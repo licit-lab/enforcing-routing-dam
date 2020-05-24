@@ -2,69 +2,133 @@
 
 PATH_SYMUVIA="/home/ladino/dev-symuvia/build/lib/libSymuVia.so"
 
-for case in CO_P CO_PI P PI OPENL
-do
-   if [ "$case" == "OPENL" ]; then 
-    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p CTR_ALG ${case} \
-    -p CONTROL_MODE ${case} &"
-      papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p CTR_ALG ${case} \
-    -p CONTROL_MODE ${case} &
-   else
-    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p CTR_ALG ${case} &"
-      papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p CTR_ALG ${case} &
-   fi
-done  
+# for case in CO_P CO_PI P PI OPENL
+# do
+#    if [ "$case" == "OPENL" ]; then 
+#     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p CTR_ALG ${case} \
+#     -p CONTROL_MODE ${case} &"
+#       papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p CTR_ALG ${case} \
+#     -p CONTROL_MODE ${case} &
+#    else
+#     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p CTR_ALG ${case} &"
+#       papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p CTR_ALG ${case} &
+#    fi
+# done  
 
 
-for case in CO_P CO_PI P PI OPENL
+# for case in CO_P CO_PI P PI OPENL
+# do
+#    if [ "$case" == "OPENL" ]; then 
+#    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p CTR_ALG ${case} \
+#     -p CONTROL_MODE ${case} \
+#     -p FILE "symuvia_network_9zones.xml" \
+#     -p NRow 3 \
+#     -p NCol 3 \
+#     -p SCENARIO "mesh9x9/" \
+#     -p ZONES "9zones/" \
+#     -p REF_SPEED "ref_speeds_9zones.csv" &"
+#       papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p CTR_ALG ${case} \
+#     -p CONTROL_MODE ${case} \
+#     -p FILE "symuvia_network_9zones.xml" \
+#     -p NRow 3 \
+#     -p NCol 3 \
+#     -p SCENARIO "mesh9x9/" \
+#     -p ZONES "9zones/" \
+#     -p REF_SPEED "ref_speeds_9zones.csv" &
+#    else
+#     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p CTR_ALG ${case} \
+#     -p FILE "symuvia_network_9zones.xml" \
+#     -p NRow 3 \
+#     -p NCol 3 \
+#     -p SCENARIO "mesh9x9/" \
+#     -p ZONES "9zones/" \
+#     -p REF_SPEED "ref_speeds_9zones.csv" &"
+#       papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p CTR_ALG ${case} \
+#     -p FILE "symuvia_network_9zones.xml" \
+#     -p NRow 3 \
+#     -p NCol 3 \
+#     -p SCENARIO "mesh9x9/" \
+#     -p ZONES "9zones/" \
+#     -p REF_SPEED "ref_speeds_9zones.csv" &
+#    fi
+# done
+
+case="P"
+
+for k in 0.01 0.05 0.1 0.2 0.5
 do
-   if [ "$case" == "OPENL" ]; then 
-   echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}.ipynb \
+    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${k}.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_KP_${k} \
     -p CTR_ALG ${case} \
-    -p CONTROL_MODE ${case} \
-    -p FILE "symuvia_network_9zones.xml" \
-    -p NRow 3 \
-    -p NCol 3 \
-    -p SCENARIO "mesh9x9/" \
-    -p ZONES "9zones/" \
-    -p REF_SPEED "ref_speeds_9zones.csv" &"
-      papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}.ipynb \
+    -p KP ${k} &"
+    papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${k}.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_KP_${k} \
     -p CTR_ALG ${case} \
-    -p CONTROL_MODE ${case} \
-    -p FILE "symuvia_network_9zones.xml" \
-    -p NRow 3 \
-    -p NCol 3 \
-    -p SCENARIO "mesh9x9/" \
-    -p ZONES "9zones/" \
-    -p REF_SPEED "ref_speeds_9zones.csv" &
-   else
-    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}.ipynb \
+    -p KP ${k} &
+done
+
+case="PI"
+
+for k in 200 300 360 400 500
+do
+    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_TI_${k}.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_TI_${k} \
     -p CTR_ALG ${case} \
-    -p FILE "symuvia_network_9zones.xml" \
-    -p NRow 3 \
-    -p NCol 3 \
-    -p SCENARIO "mesh9x9/" \
-    -p ZONES "9zones/" \
-    -p REF_SPEED "ref_speeds_9zones.csv" &"
-      papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}.ipynb \
+    -p TI ${k} &"
+     papermill 01_Zone_Control.ipynb 01_Zone_Control_TI_${k}.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_TI_${k} \
     -p CTR_ALG ${case} \
-    -p FILE "symuvia_network_9zones.xml" \
-    -p NRow 3 \
-    -p NCol 3 \
-    -p SCENARIO "mesh9x9/" \
-    -p ZONES "9zones/" \
-    -p REF_SPEED "ref_speeds_9zones.csv" &
-   fi
+    -p TI ${k} &  
+done
+
+case="PI"
+
+for k in 1 10 50 100 500
+do
+    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_TWD_${k}.ipynb \
+    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_TWD_${k} \
+    -p CTR_ALG ${case} \
+    -p TWD ${k} &"
+     papermill 01_Zone_Control.ipynb 01_Zone_Control_TWD_${k}.ipynb \
+    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_TWD_${k} \
+    -p CTR_ALG ${case} \
+    -p TWD ${k} &  
+done
+
+case="CO_P"
+
+for k in 0.1 0.3 0.5 0.7 0.9
+do
+    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_SLF_${k}.ipynb \
+    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_SLF_${k} \
+    -p CTR_ALG ${case} \
+    -p SELFISH ${k} &"
+     papermill 01_Zone_Control.ipynb 01_Zone_Control_SLF_${k}.ipynb \
+    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_SLF_${k} \
+    -p CTR_ALG ${case} \
+    -p SELFISH ${k} &   
 done
