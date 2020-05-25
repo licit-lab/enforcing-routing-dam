@@ -2,6 +2,8 @@
 
 PATH_SYMUVIA="/home/ladino/dev-symuvia/build/lib/libSymuVia.so"
 
+# Test Network 3x3 
+
 # for case in CO_P CO_PI P PI OPENL
 # do
 #    if [ "$case" == "OPENL" ]; then 
@@ -23,6 +25,7 @@ PATH_SYMUVIA="/home/ladino/dev-symuvia/build/lib/libSymuVia.so"
 #    fi
 # done  
 
+# Test Network 5x5
 
 # for case in CO_P CO_PI P PI OPENL
 # do
@@ -69,6 +72,8 @@ PATH_SYMUVIA="/home/ladino/dev-symuvia/build/lib/libSymuVia.so"
 #    fi
 # done
 
+# Test P for P control 
+
 case="P"
 
 for k in 0.01 0.05 0.1 0.2 0.5
@@ -85,37 +90,39 @@ do
     -p KP ${k} &
 done
 
-case="PI"
+# case="PI"
 
-for k in 200 300 360 400 500
-do
-    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_TI_${k}.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_TI_${k} \
-    -p CTR_ALG ${case} \
-    -p TI ${k} &"
-     papermill 01_Zone_Control.ipynb 01_Zone_Control_TI_${k}.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_TI_${k} \
-    -p CTR_ALG ${case} \
-    -p TI ${k} &  
-done
+# for k in 200 300 360 400 500
+# do
+#     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_TI_${k}.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p EXPERIMENT CTR_TI_${k} \
+#     -p CTR_ALG ${case} \
+#     -p TI ${k} &"
+#      papermill 01_Zone_Control.ipynb 01_Zone_Control_TI_${k}.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p EXPERIMENT CTR_TI_${k} \
+#     -p CTR_ALG ${case} \
+#     -p TI ${k} &  
+# done
 
-case="PI"
+# case="PI"
 
-for k in 1 10 50 100 500
-do
-    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_TWD_${k}.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_TWD_${k} \
-    -p CTR_ALG ${case} \
-    -p TWD ${k} &"
-     papermill 01_Zone_Control.ipynb 01_Zone_Control_TWD_${k}.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_TWD_${k} \
-    -p CTR_ALG ${case} \
-    -p TWD ${k} &  
-done
+# for k in 1 10 50 100 500
+# do
+#     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_TWD_${k}.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p EXPERIMENT CTR_TWD_${k} \
+#     -p CTR_ALG ${case} \
+#     -p TWD ${k} &"
+#      papermill 01_Zone_Control.ipynb 01_Zone_Control_TWD_${k}.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p EXPERIMENT CTR_TWD_${k} \
+#     -p CTR_ALG ${case} \
+#     -p TWD ${k} &  
+# done
+
+# Test Cooperative level 
 
 case="CO_P"
 
