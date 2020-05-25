@@ -139,7 +139,6 @@ class Integrator:
             self.time_update()
             return self.ix[-1]
         else:
-            area = self.T * val  # Base * height
             self.ix = np.vstack((self.ix, area))
             self.time_update()
             return np.sum(self.ix, axis=0)  # Cumulated areas
@@ -294,9 +293,6 @@ class ComputeVanishingControl:
             totalControl = G.graph["self"] * localControl + (1 - G.graph["self"]) * np.clip(
                 neighControl, self.uMin, self.uMax
             )
-
-            # Formatting control output
-            return dict(zip(speeds[-1].keys(), totalControl))
 
         elif self.typeCtr == "CO_PI":
             _, L, epsilon = get_graph_data(G)  # Works because the graph is small
