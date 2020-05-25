@@ -133,8 +133,9 @@ class Integrator:
         """
             Compute sum(T* x_k) and updates the memory 
         """
+        area = self.T * val  # Base * height
         if self.ix is None:
-            self.ix = val.reshape(1, self.N)
+            self.ix = area.reshape(1, self.N)
             self.time_update()
             return self.ix[-1]
         else:
