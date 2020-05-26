@@ -31,7 +31,7 @@ for case in CO_P CO_PI P PI
 do
     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_opt.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_OPT_${case}
+    -p EXPERIMENT CTR_OPT_${case} \
     -p CTR_ALG ${case} \
     -p KP 0.2 \
     -p TI 1200 \
@@ -40,7 +40,7 @@ do
     -p SELFISH 0.7 &"
     papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_opt.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_OPT_${case}
+    -p EXPERIMENT CTR_OPT_${case} \
     -p CTR_ALG ${case} \
     -p KP 0.2 \
     -p TI 1200 \
