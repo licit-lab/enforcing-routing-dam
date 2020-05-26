@@ -47,7 +47,6 @@ do
     -p CO_KP 0.2 \
     -p CO_TI 1200 \
     -p SELFISH 0.7 &
-   fi
 done  
 
 
