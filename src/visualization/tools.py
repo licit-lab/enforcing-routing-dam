@@ -146,7 +146,13 @@ def plot_variable_cases(
     vec = range(len(ax.flatten()))
 
     for c1, a, i in zip(df_lst[0], ax.flatten(), vec):
-        dftot[c1].plot(ax=a, title=c1, grid=True)
+        try:
+            dfplt1 = dftot[c1].loc[:, dftot[c1].columns != "NoCtr"]
+            dfplt2 = dftot[c1].loc[:, "NoCtr"]
+            dfplt1.plot(ax=a, title=c1, grid=True)
+            dfplt2.plot(ax=a, title=c1, grid=True, color="black", linestyle="--", linewidth=1.5)
+        except IndexError:
+            dftot[c1].plot(ax=a, title=c1, grid=True)
         # a.set_ylim([0, dftot.max().max() + 0.1])
         a.yaxis.set_major_formatter(ticker.FuncFormatter(human_format))
         if i >= n_sensors:
@@ -168,7 +174,17 @@ def plot_variable_cases(
         dfgtot = dfgtot.reset_index(level=0).rename(columns={"level_0": "Strategy"})
         dfgtot = dfgtot.pivot(columns="Strategy")
 
-        dfgtot.plot(ax=a, grid=True, title=dct_var.get(variable, ""))
+        try:
+            dfgtot = dfgtot["sensor_network"]
+            dfgtot1 = dfgtot.loc[:, dfgtot.columns != "NoCtr"]
+            dfgtot2 = dfgtot.loc[:, "NoCtr"]
+            dfgtot1.plot(
+                ax=a, title=dct_var.get(variable, ""), grid=True,
+            )
+            dfgtot2.plot(ax=a, title=dct_var.get(variable, ""), grid=True, color="black", linestyle="--", linewidth=1.5)
+        except IndexError:
+            dfgtot.plot(ax=a, grid=True, title=dct_var.get(variable, ""))
+
         a.yaxis.set_major_formatter(ticker.FuncFormatter(human_format))
 
     else:
