@@ -280,10 +280,9 @@ class ComputeVanishingControl:
             control = proportional + differential
 
             # Bound control
-
             totalControl = np.clip(control, self.uMin, self.uMax)
 
-        elif self.typeCtr == "COP":
+        elif self.typeCtr == "COP" or self.typeCtr == "COST1":
 
             # Network data
             _, L, epsilon, _, _ = get_graph_data(G)  # Works because the graph is small
