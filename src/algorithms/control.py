@@ -125,7 +125,8 @@ def get_graph_data(G: nx.Graph) -> tuple:
 class Integrator:
     def __init__(self, N: int = 1, SamplingTime: float = TS):
         self.N = N
-        self.ix = None
+        self.ix = np.zeros(N).reshape(1, N)
+        self.x = np.zeros(N).reshape(1, N)
         self.T = SamplingTime
         self.t = [0]
 
@@ -134,10 +135,10 @@ class Integrator:
             Compute sum(T* x_k) and updates the memory 
         """
         area = self.T * val  # Base * height
-        if self.ix is None:
-            self.ix = area.reshape(1, self.N)
-            self.time_update()
-            return self.ix[-1]
+        self.x = np.vstack((self.x, area))
+        self.ix = np.vstack((self.ix, np.sum(self.x, axis=0)))
+        self.time_update()
+        return self.ix[-1]
         else:
             self.ix = np.vstack((self.ix, area))
             self.time_update()
