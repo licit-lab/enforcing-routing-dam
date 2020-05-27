@@ -139,10 +139,6 @@ class Integrator:
         self.ix = np.vstack((self.ix, np.sum(self.x, axis=0)))
         self.time_update()
         return self.ix[-1]
-        else:
-            self.ix = np.vstack((self.ix, area))
-            self.time_update()
-            return np.sum(self.ix, axis=0)  # Cumulated areas
 
     def time_update(self):
         """ time vector"""
@@ -153,63 +149,31 @@ class Integrator:
         return self.integ(val)
 
 
-class ComputePIDControl:
-    """ 
-        Individual PID Control 
-    
-    """
+class Derivator:
+    def __init__(self, N: int = 1, SamplingTime: float = TS):
+        self.N = N
+        self.dx = np.zeros(N).reshape(1, N)
+        self.x = np.zeros(N).reshape(1, N)  # For accessing the full vector
+        self.T = SamplingTime
+        self.t = [0]
 
-    def __init__(self, G: nx.Graph, samplingTime: float = TS, kP: float = 1, Ti: float = 360) -> None:
-        N = len(G.nodes)
-        self.integrator = Integrator(N, samplingTime)
-        self.uMax = 1
-        self.uMin = 0
-        self.kP = kP
-        self.Ti = Ti
-        self.Twd = 2 * Ti
-        self.windReset = np.zeros((1, N))
-
-    def __call__(self, simulationstep: int, triggertime: int, speeds: list, G: nx.Graph) -> dict:
-        """ Computes the control law based on current speeds and some graph information
-
-            :param simulationstep: current simulation step
-            :type simulationstep: int
-            :param triggertime: trigger time on the control (ignored in automode)
-            :type triggertime: int
-            :param speeds: list of region speeds
-            :type speeds: list
-            :param G: Network graph
-            :type G: nx.Graph
-            :return: dictionary with vanishing policies per region
-            :rtype: dict
+    def diff(self, val):
         """
-        # Case speed is empty
-        if not speeds:
-            return dict(zip(list(G.nodes), repeat(0)))
+            Compute (x_k - x_{k-1})/T and updates the memory 
+        """
+        dif = (val - self.x[-1]) / self.T
+        self.x = np.vstack((self.x, val))
+        self.dx = np.vstack((self.dx, dif))
+        self.time_update()
+        return self.dx[-1]
 
-        # Compute error
-        errorState = np.array([G.nodes[s]["freeFlowSpeed"] - speeds[-1][s] for s in G.nodes])
+    def time_update(self):
+        """ time vector"""
+        self.t.append(self.t[-1] + self.T)
 
-        # Control computation
-        proportional = self.kP * errorState
-
-        # Integral
-        integral = self.kP * 1 / self.Ti * self.integrator(errorState + self.windReset)
-
-        # Control
-        control = proportional + integral
-
-        # Saturated control
-        boundControl = np.clip(control, self.uMin, self.uMax)
-
-        # Windup
-        self.windReset = (boundControl - control) / self.Twd
-
-        # Safe control
-        totalControl = np.clip(control, self.uMin, self.uMax)
-
-        # Format control output
-        return dict(zip(speeds[-1].keys(), totalControl))
+    def __call__(self, val):
+        """ Call like diff(error) """
+        return self.diff(val)
 
 
 class ComputeVanishingControl:
