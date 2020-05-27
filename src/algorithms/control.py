@@ -332,7 +332,7 @@ class ComputeVanishingControl:
                 neighControl, self.uMin, self.uMax
             )
 
-        elif self.typeCtr == "COPNL":
+        elif self.typeCtr == "COPNL" or self.typeCtr == "COST3":
             _, L, epsilon, A, D = get_graph_data(G)  # Works because the graph is small
             d = np.array(list(D.values()))
             normError = np.array(
@@ -352,6 +352,26 @@ class ComputeVanishingControl:
 
             # Bounding control
             totalControl = np.clip(totalControl, self.uMin, self.uMax)
+
+        elif self.typeCtr == "COPE" or self.typeCtr == "COST2":
+            _, L, epsilon, A, D = get_graph_data(G)  # Works because the graph is small
+            d = np.array(list(D.values()))
+            normError = np.array(
+                [(G.nodes[s]["freeFlowSpeed"] - speeds[-1][s]) / G.nodes[s]["freeFlowSpeed"] for s in G.nodes]
+            )
+
+            # Local control
+            localControl = np.clip(normError, self.uMin, self.uMax)
+            self.localU.append(localControl)
+
+            # Cooperative term
+            neighControl = self.kP * epsilon * A @ normError / d
+            self.coopU.append(neighControl)
+
+            # Total control law
+            totalControl = G.graph["self"] * localControl + (1 - G.graph["self"]) * np.clip(
+                neighControl, self.uMin, self.uMax
+            )
 
         # Append Control
         self.U.append(totalControl)
