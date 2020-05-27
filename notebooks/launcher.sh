@@ -51,41 +51,42 @@ PATH_SYMUVIA="/home/ladino/dev-symuvia/build/lib/libSymuVia.so"
 
 
 # Test Network 5x5  New cooperative algorithms 
-# for case in COST1 COST2 COST3
-# do
-#     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_new07.ipynb \
-#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-#     -p EXPERIMENT CTR_NEW07_${case} \
-#     -p CTR_ALG ${case} \
-#     -p KP 0.2 \
-#     -p CO_KP 0.2 \
-#     -p SELFISH 0.7 &"
-#     papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_new07.ipynb \
-#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-#     -p EXPERIMENT CTR_OPT_${case} \
-#     -p CTR_ALG ${case} \
-#     -p KP 0.2 \
-#     -p CO_KP 0.2 \
-#     -p SELFISH 0.7 &
-# done  
 
-# Test 3 cooperative strategies 
+# Test 3 cooperative strategies with selfishness 0.7
 
 for case in COST1 COST2 COST3
 do
-    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_newco.ipynb \
+    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_newco07.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_NEWCO_${case} \
+    -p EXPERIMENT CTR_NEWCO07_${case} \
     -p CTR_ALG ${case} \
     -p CO_KP 0.2 \
-    -p SELFISH 0.5 &"
-    papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_newco.ipynb \
+    -p SELFISH 0.7 &"
+    papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_newco07.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_NEWCO_${case} \
+    -p EXPERIMENT CTR_NEWCO07_${case} \
     -p CTR_ALG ${case} \
     -p CO_KP 0.2 \
-    -p SELFISH 0.5 &
+    -p SELFISH 0.7 &
 done  
+
+# Test 3 cooperative strategies 
+
+# for case in COST1 COST2 COST3
+# do
+#     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_newco.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p EXPERIMENT CTR_NEWCO_${case} \
+#     -p CTR_ALG ${case} \
+#     -p CO_KP 0.2 \
+#     -p SELFISH 0.5 &"
+#     papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_newco.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p EXPERIMENT CTR_NEWCO_${case} \
+#     -p CTR_ALG ${case} \
+#     -p CO_KP 0.2 \
+#     -p SELFISH 0.5 &
+# done  
 
 # Test Network 3x3
 
@@ -190,23 +191,23 @@ done
 
 # Test Sensitivity Kd
 
-case="PD"
+# case="PD"
 
-for k in 0.1 0.2 0.5 1
-do
-    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_TD_${k} \
-    -p CTR_ALG ${case} \
-    -p KP 0.2 \
-    -p TD ${k} &"
-    papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_TD_${k} \
-    -p CTR_ALG ${case} \
-    -p KP 0.2 \
-    -p TD ${k} &
-done
+# for k in 0.1 0.2 0.5 1
+# do
+#     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p EXPERIMENT CTR_TD_${k} \
+#     -p CTR_ALG ${case} \
+#     -p KP 0.2 \
+#     -p TD ${k} &"
+#     papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p EXPERIMENT CTR_TD_${k} \
+#     -p CTR_ALG ${case} \
+#     -p KP 0.2 \
+#     -p TD ${k} &
+# done
 
 
 # Test Cooperative level 
@@ -247,18 +248,18 @@ done
 
 # Test Cooperative level KP
 
-case="COPNL"
+# case="COPNL"
 
-for k in 0.1 0.2 0.3 0.4
-do
-    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_COBET_${k}.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_COBET_${k} \
-    -p CTR_ALG ${case} \
-    -p BETA ${k} &"
-    papermill 01_Zone_Control.ipynb 01_Zone_Control_COBET_${k}.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_COBET_${k} \
-    -p CTR_ALG ${case} \
-    -p BETA ${k} &
-done
+# for k in 0.1 0.2 0.3 0.4
+# do
+#     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_COBET_${k}.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p EXPERIMENT CTR_COBET_${k} \
+#     -p CTR_ALG ${case} \
+#     -p BETA ${k} &"
+#     papermill 01_Zone_Control.ipynb 01_Zone_Control_COBET_${k}.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p EXPERIMENT CTR_COBET_${k} \
+#     -p CTR_ALG ${case} \
+#     -p BETA ${k} &
+# done
