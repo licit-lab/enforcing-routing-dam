@@ -119,7 +119,9 @@ def get_graph_data(G: nx.Graph) -> tuple:
     N = len(G.nodes)
     P = np.identity(N) - epsilon * L
 
-    return P, L, epsilon
+    A = nx.adjacency_matrix(G)
+
+    return P, L, epsilon, A, D
 
 
 class Integrator:
@@ -182,17 +184,28 @@ class ComputeVanishingControl:
     """
 
     def __init__(
-        self, G: nx.Graph, samplingTime: float = TS, kP: float = 1, Ti: float = 360, Twd: float = 720, typeCtrl="CO_P"
+        self,
+        G: nx.Graph,
+        samplingTime: float = TS,
+        kP: float = 1,
+        Ti: float = 360,
+        Td: float = 0.5,
+        Twd: float = 720,
+        beta: float = 0.3,
+        typeCtrl="COP",
     ) -> None:
         N = len(G.nodes)
         self.integrator = Integrator(N, samplingTime)
+        self.derivator = Derivator(N, samplingTime)
         self.uMax = 1
         self.uMin = 0
         self.kP = kP
         self.Ti = Ti
+        self.Td = Td
         self.typeCtr = typeCtrl
         self.Twd = Twd
         self.windReset = np.zeros((1, N))
+        self.beta = beta
 
         # Memory
         self.uKI = []
@@ -223,24 +236,59 @@ class ComputeVanishingControl:
 
         if self.typeCtr == "P":
 
+            # Compute error
             errorState = np.array([G.nodes[s]["freeFlowSpeed"] - speeds[-1][s] for s in G.nodes])
+
+            # Control
             control = self.kP * errorState
+
+            # Bound Control
             totalControl = np.clip(control, self.uMin, self.uMax)
 
         elif self.typeCtr == "PI":
 
+            # Compute error
             errorState = np.array([G.nodes[s]["freeFlowSpeed"] - speeds[-1][s] for s in G.nodes])
+
+            # Proportional
             proportional = self.kP * errorState
+
+            # Integral
             integral = self.kP * 1 / self.Ti * self.integrator(errorState + self.windReset)
+
+            # Control
             control = proportional + integral
-            boundControl = np.clip(control, self.uMin, self.uMax)
 
             # Windup (update for next step)
+            boundControl = np.clip(control, self.uMin, self.uMax)
             self.windReset = (boundControl - control) / self.Twd
+
+            # Bound Control
+            totalControl = boundControl
+
+        elif self.typeCtr == "PD":
+
+            errorState = np.array([G.nodes[s]["freeFlowSpeed"] - speeds[-1][s] for s in G.nodes])
+
+            # Proportional
+            proportional = self.kP * errorState
+
+            # Differential
+            differential = self.kP * self.Td * self.derivator(errorState)
+
+            # Control
+            control = proportional + differential
+
+            # Bound control
+
             totalControl = np.clip(control, self.uMin, self.uMax)
 
-        elif self.typeCtr == "CO_P":
-            _, L, epsilon = get_graph_data(G)  # Works because the graph is small
+        elif self.typeCtr == "COP":
+
+            # Network data
+            _, L, epsilon, _, _ = get_graph_data(G)  # Works because the graph is small
+
+            # Normalized states
             normState = np.array([speeds[-1][s] / G.nodes[s]["freeFlowSpeed"] for s in G.nodes])
 
             # Compute local control
@@ -259,8 +307,8 @@ class ComputeVanishingControl:
                 neighControl, self.uMin, self.uMax
             )
 
-        elif self.typeCtr == "CO_PI":
-            _, L, epsilon = get_graph_data(G)  # Works because the graph is small
+        elif self.typeCtr == "COPI":
+            _, L, epsilon, _, _ = get_graph_data(G)  # Works because the graph is small
             normState = np.array([speeds[-1][s] / G.nodes[s]["freeFlowSpeed"] for s in G.nodes])
 
             # Compute local control
@@ -283,6 +331,28 @@ class ComputeVanishingControl:
             totalControl = G.graph["self"] * localControl + (1 - G.graph["self"]) * np.clip(
                 neighControl, self.uMin, self.uMax
             )
+
+        elif self.typeCtr == "COPNL":
+            _, L, epsilon, A, D = get_graph_data(G)  # Works because the graph is small
+            d = np.array(list(D.values()))
+            normError = np.array(
+                [(G.nodes[s]["freeFlowSpeed"] - speeds[-1][s]) / G.nodes[s]["freeFlowSpeed"] for s in G.nodes]
+            )
+
+            # Local control
+            localControl = np.clip(normError, self.uMin, self.uMax)
+            self.localU.append(localControl)
+
+            # Cooperative (epsilon)
+            neighControl = self.beta * A @ normError / d
+            self.coopU.append(neighControl)
+
+            # Total control law
+            totalControl = self.kP * (1 + neighControl) * localControl
+
+            # Bounding control
+            totalControl = np.clip(totalControl, self.uMin, self.uMax)
+
         # Append Control
         self.U.append(totalControl)
 
