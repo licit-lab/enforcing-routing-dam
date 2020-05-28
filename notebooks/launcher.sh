@@ -54,21 +54,21 @@ PATH_SYMUVIA="/home/ladino/dev-symuvia/build/lib/libSymuVia.so"
 
 # Test 3 cooperative strategies with selfishness 0.7
 
-for case in COST1 COST2 COST3
-do
-    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_newco07.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_NEWCO07_${case} \
-    -p CTR_ALG ${case} \
-    -p CO_KP 0.2 \
-    -p SELFISH 0.7 &"
-    papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_newco07.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_NEWCO07_${case} \
-    -p CTR_ALG ${case} \
-    -p CO_KP 0.2 \
-    -p SELFISH 0.7 &
-done  
+# for case in COST1 COST2 COST3
+# do
+#     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_newco07.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p EXPERIMENT CTR_NEWCO07_${case} \
+#     -p CTR_ALG ${case} \
+#     -p CO_KP 0.2 \
+#     -p SELFISH 0.7 &"
+#     papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_newco07.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p EXPERIMENT CTR_NEWCO07_${case} \
+#     -p CTR_ALG ${case} \
+#     -p CO_KP 0.2 \
+#     -p SELFISH 0.7 &
+# done  
 
 # Test 3 cooperative strategies 
 
@@ -191,23 +191,23 @@ done
 
 # Test Sensitivity Kd
 
-# case="PD"
+case="PD"
 
-# for k in 0.1 0.2 0.5 1
-# do
-#     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}.ipynb \
-#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-#     -p EXPERIMENT CTR_TD_${k} \
-#     -p CTR_ALG ${case} \
-#     -p KP 0.2 \
-#     -p TD ${k} &"
-#     papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}.ipynb \
-#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-#     -p EXPERIMENT CTR_TD_${k} \
-#     -p CTR_ALG ${case} \
-#     -p KP 0.2 \
-#     -p TD ${k} &
-# done
+for k in 1.5 2 2.5 3 4 5
+do
+    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}.ipynb \
+    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_TD_${k} \
+    -p CTR_ALG ${case} \
+    -p KP 0.2 \
+    -p TD ${k} &"
+    papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}.ipynb \
+    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_TD_${k} \
+    -p CTR_ALG ${case} \
+    -p KP 0.2 \
+    -p TD ${k} &
+done
 
 
 # Test Cooperative level 
