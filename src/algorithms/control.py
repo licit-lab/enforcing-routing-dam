@@ -194,9 +194,9 @@ class ComputeVanishingControl:
         beta: float = 0.3,
         typeCtrl="COP",
     ) -> None:
-        N = len(G.nodes)
-        self.integrator = Integrator(N, samplingTime)
-        self.derivator = Derivator(N, samplingTime)
+        self.N = len(G.nodes)
+        self.integrator = Integrator(self.N, samplingTime)
+        self.derivator = Derivator(self.N, samplingTime)
         self.uMax = 1
         self.uMin = 0
         self.kP = kP
@@ -204,14 +204,16 @@ class ComputeVanishingControl:
         self.Td = Td
         self.typeCtr = typeCtrl
         self.Twd = Twd
-        self.windReset = np.zeros((1, N))
+        self.windReset = np.zeros((1, self.N))
         self.beta = beta
 
         # Memory
         self.uKI = []
         self.localU = []
         self.coopU = []
+        self.errorSignal = []
         self.U = []
+        self.proportional = []
 
         self.ukP = []
 
@@ -234,6 +236,8 @@ class ComputeVanishingControl:
         if not speeds:
             return dict(zip(list(G.nodes), repeat(0)))
 
+        self.zones = speeds[-1].keys()
+
         if self.typeCtr == "P":
 
             # Compute error
@@ -241,6 +245,11 @@ class ComputeVanishingControl:
 
             # Control
             control = self.kP * errorState
+
+            # Memory Control
+            self.errorSignal.append(errorState)
+            self.localU.append(control)
+            self.coopU.append(np.zeros(self.N))
 
             # Bound Control
             totalControl = np.clip(control, self.uMin, self.uMax)
@@ -263,6 +272,11 @@ class ComputeVanishingControl:
             boundControl = np.clip(control, self.uMin, self.uMax)
             self.windReset = (boundControl - control) / self.Twd
 
+            # Memory Control
+            self.errorSignal.append(errorState)
+            self.localU.append(control)
+            self.coopU.append(np.zeros(self.N))
+
             # Bound Control
             totalControl = boundControl
 
@@ -279,10 +293,15 @@ class ComputeVanishingControl:
             # Control
             control = proportional + differential
 
+            # Memory Control
+            self.errorSignal.append(errorState)
+            self.localU.append(control)
+            self.coopU.append(np.zeros(self.N))
+
             # Bound control
             totalControl = np.clip(control, self.uMin, self.uMax)
 
-        elif self.typeCtr == "COP" or self.typeCtr == "COST1":
+        elif self.typeCtr in ("COP", "COST1"):
 
             # Network data
             _, L, epsilon, _, _ = get_graph_data(G)  # Works because the graph is small
@@ -292,13 +311,16 @@ class ComputeVanishingControl:
 
             # Compute local control
             localControl = np.clip(1 - normState, self.uMin, self.uMax)
-            self.localU.append(localControl)
 
             # Compute neighbor information
             proportional = self.kP * epsilon * L @ normState
 
             # Cooperative term
             neighControl = proportional
+
+            # Memory control
+            self.errorSignal.append(1 - normState)
+            self.localU.append(localControl)
             self.coopU.append(neighControl)
 
             # Total control law
@@ -306,13 +328,16 @@ class ComputeVanishingControl:
                 neighControl, self.uMin, self.uMax
             )
 
-        elif self.typeCtr == "COPI":
+        elif self.typeCtr in ("COPI", "COST4"):
+
+            # Network data
             _, L, epsilon, _, _ = get_graph_data(G)  # Works because the graph is small
+
+            # Normalized states
             normState = np.array([speeds[-1][s] / G.nodes[s]["freeFlowSpeed"] for s in G.nodes])
 
             # Compute local control
             localControl = np.clip(1 - normState, self.uMin, self.uMax)
-            self.localU.append(localControl)
 
             # Compute neighbor information
             proportional = self.kP * epsilon * L @ normState
@@ -320,30 +345,43 @@ class ComputeVanishingControl:
 
             # Cooperative term
             neighControl = proportional + integral
-            self.coopU.append(neighControl)
             boundControl = np.clip(neighControl, self.uMin, self.uMax)
 
             # Windup (update for next step)
             self.windReset = (boundControl - neighControl) / self.Twd
+
+            # Memory control
+            self.errorSignal.append(1 - normState)
+            self.localU.append(localControl)
+            self.coopU.append(neighControl)
 
             # Total control law
             totalControl = G.graph["self"] * localControl + (1 - G.graph["self"]) * np.clip(
                 neighControl, self.uMin, self.uMax
             )
 
-        elif self.typeCtr == "COPNL" or self.typeCtr == "COST3":
+        elif self.typeCtr in ("COPNL", "COST3"):
+
+            # Network data
             _, L, epsilon, A, D = get_graph_data(G)  # Works because the graph is small
+
+            # Find degrees vector
             d = np.array(list(D.values()))
+
+            # Compute error
             normError = np.array(
                 [(G.nodes[s]["freeFlowSpeed"] - speeds[-1][s]) / G.nodes[s]["freeFlowSpeed"] for s in G.nodes]
             )
 
             # Local control
             localControl = np.clip(normError, self.uMin, self.uMax)
-            self.localU.append(localControl)
 
             # Cooperative (epsilon)
             neighControl = self.beta * A @ normError / d
+
+            # Memory control
+            self.errorSignal.append(normError)
+            self.localU.append(localControl)
             self.coopU.append(neighControl)
 
             # Total control law
@@ -352,19 +390,28 @@ class ComputeVanishingControl:
             # Bounding control
             totalControl = np.clip(totalControl, self.uMin, self.uMax)
 
-        elif self.typeCtr == "COPE" or self.typeCtr == "COST2":
+        elif self.typeCtr in ("COPE", "COST2"):
+
+            # Network data
             _, L, epsilon, A, D = get_graph_data(G)  # Works because the graph is small
+
+            # Find degrees vector
             d = np.array(list(D.values()))
+
+            # Compute error
             normError = np.array(
                 [(G.nodes[s]["freeFlowSpeed"] - speeds[-1][s]) / G.nodes[s]["freeFlowSpeed"] for s in G.nodes]
             )
 
             # Local control
             localControl = np.clip(normError, self.uMin, self.uMax)
-            self.localU.append(localControl)
 
             # Cooperative term
             neighControl = self.kP * epsilon * A @ normError / d
+
+            # Memory control
+            self.errorSignal.append(normError)
+            self.localU.append(localControl)
             self.coopU.append(neighControl)
 
             # Total control law
@@ -372,8 +419,47 @@ class ComputeVanishingControl:
                 neighControl, self.uMin, self.uMax
             )
 
+        else:
+            pass
+
         # Append Control
         self.U.append(totalControl)
 
         # Formatting control output
-        return dict(zip(speeds[-1].keys(), totalControl))
+        return dict(zip(self.zones, totalControl))
+
+    @property
+    def error(self):
+        if self.errorSignal:
+            return dict(zip(self.zones, self.errorSignal[-1]))
+        return dict(zip(self.zones, [] * self.N))
+
+    @property
+    def localControl(self):
+        if self.localU:
+            return dict(zip(self.zones, self.localU[-1]))
+        return dict(zip(self.zones, [] * self.N))
+
+    @property
+    def cooperativeControl(self):
+        if self.localU:
+            return dict(zip(self.zones, self.coopU[-1]))
+        return dict(zip(self.zones, [] * self.N))
+
+    @property
+    def proportionalControl(self):
+        if self.typeCtr in ("P", "PI", "PD") and self.proportional is None:
+            return dict(zip(self.zones, self.kP * self.errorSignal[-1]))
+        return dict(zip(self.zones, [] * self.N))
+
+    @property
+    def integralControl(self):
+        if self.typeCtr in ("PI",):
+            return dict(zip(self.zones, self.integrator.ix[-1]))
+        return dict(zip(self.zones, [] * self.N))
+
+    @property
+    def derivativeControl(self):
+        if self.typeCtr in ("PD",):
+            return dict(zip(self.zones, self.derivator.dx[-1]))
+        return dict(zip(self.zones, [] * self.N))
