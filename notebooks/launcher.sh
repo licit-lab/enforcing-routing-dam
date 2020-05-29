@@ -72,21 +72,21 @@ PATH_SYMUVIA="/home/ladino/dev-symuvia/build/lib/libSymuVia.so"
 
 # Test 3 cooperative strategies 
 
-# for case in COST1 COST2 COST3
-# do
-#     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_newco.ipynb \
-#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-#     -p EXPERIMENT CTR_NEWCO_${case} \
-#     -p CTR_ALG ${case} \
-#     -p CO_KP 0.2 \
-#     -p SELFISH 0.5 &"
-#     papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_newco.ipynb \
-#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-#     -p EXPERIMENT CTR_NEWCO_${case} \
-#     -p CTR_ALG ${case} \
-#     -p CO_KP 0.2 \
-#     -p SELFISH 0.5 &
-# done  
+for case in COST1 COST2 COST3
+do
+    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_newco.ipynb \
+    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_NEWCO_${case} \
+    -p CTR_ALG ${case} \
+    -p CO_KP 0.2 \
+    -p SELFISH 0.7 &"
+    papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_newco.ipynb \
+    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_NEWCO_${case} \
+    -p CTR_ALG ${case} \
+    -p CO_KP 0.2 \
+    -p SELFISH 0.7 &
+done  
 
 # Test Network 3x3
 
@@ -193,7 +193,7 @@ PATH_SYMUVIA="/home/ladino/dev-symuvia/build/lib/libSymuVia.so"
 
 case="PD"
 
-for k in 1.5 2 2.5 3 4 5
+for k in 50 100 200 300 400
 do
     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
@@ -248,18 +248,18 @@ done
 
 # Test Cooperative level KP
 
-# case="COPNL"
+case="COPNL"
 
-# for k in 0.1 0.2 0.3 0.4
-# do
-#     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_COBET_${k}.ipynb \
-#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-#     -p EXPERIMENT CTR_COBET_${k} \
-#     -p CTR_ALG ${case} \
-#     -p BETA ${k} &"
-#     papermill 01_Zone_Control.ipynb 01_Zone_Control_COBET_${k}.ipynb \
-#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-#     -p EXPERIMENT CTR_COBET_${k} \
-#     -p CTR_ALG ${case} \
-#     -p BETA ${k} &
-# done
+for k in 0.1 0.2 0.3 0.4 0.5
+do
+    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_COBET_${k}.ipynb \
+    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_COBET_${k} \
+    -p CTR_ALG ${case} \
+    -p BETA ${k} &"
+    papermill 01_Zone_Control.ipynb 01_Zone_Control_COBET_${k}.ipynb \
+    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_COBET_${k} \
+    -p CTR_ALG ${case} \
+    -p BETA ${k} &
+done
