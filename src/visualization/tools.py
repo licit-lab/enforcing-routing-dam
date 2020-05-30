@@ -5,6 +5,7 @@
 import math
 from lxml import etree
 import pandas as pd
+import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib import ticker
 
@@ -148,13 +149,19 @@ def plot_variable_cases(
     for c1, a, i in zip(df_lst[0], ax.flatten(), vec):
         try:
             dfplt1 = dftot[c1].loc[:, dftot[c1].columns != "NoCtr"]
+            dfplt1.index = dfplt1.index * 3  # Minutes
             dfplt2 = dftot[c1].loc[:, "NoCtr"]
+            dfplt2.index = dfplt2.index * 3  # Minutes
             dfplt1.plot(ax=a, title=c1, grid=True)
             dfplt2.plot(ax=a, title=c1, grid=True, color="black", linestyle="--", linewidth=1.5)
-        except (IndexError, KeyError) as e:
-            dftot[c1].plot(ax=a, title=c1, grid=True)
+        except (IndexError, KeyError):
+            dfplt1 = dftot[c1]
+            dfplt1.index = dfplt1.index * 3  # Minutes
+            dfplt1.plot(ax=a, title=c1, grid=True)
+        # Minutes
         # a.set_ylim([0, dftot.max().max() + 0.1])
         a.yaxis.set_major_formatter(ticker.FuncFormatter(human_format))
+        a.set_xlabel("Time [min]")
         if i >= n_sensors:
             print(i)
             a.set_axis_off()
@@ -163,8 +170,8 @@ def plot_variable_cases(
     fig.tight_layout()
     fig.subplots_adjust(top=0.95)
 
-    fig, a = plt.subplots()
     if variable != "ctr":
+        fig, a = plt.subplots()
         dfg_lst = []
         for case in cases:
             dfg = pd.read_csv(file_path + "/" + case + "/" + variable + "G" + ".csv")
@@ -177,16 +184,20 @@ def plot_variable_cases(
         try:
             dfgtot = dfgtot["sensor_network"]
             dfgtot1 = dfgtot.loc[:, dfgtot.columns != "NoCtr"]
+            dfgtot1.index = dfgtot1.index * 3  # Minutes
             dfgtot2 = dfgtot.loc[:, "NoCtr"]
+            dfgtot2.index = dfgtot2.index * 3  # Minutes
             dfgtot1.plot(
                 ax=a, title=dct_var.get(variable, ""), grid=True,
             )
             dfgtot2.plot(ax=a, title=dct_var.get(variable, ""), grid=True, color="black", linestyle="--", linewidth=1.5)
-        except (IndexError, KeyError) as e:
-            dfgtot.plot(ax=a, grid=True, title=dct_var.get(variable, ""))
+        except (IndexError, KeyError):
+            dfgtot1 = dfgtot
+            dfgtot1.index = dfgtot1.index * 3  # Minutes
+            dfgtot1.plot(ax=a, grid=True, title=dct_var.get(variable, ""))
 
         a.yaxis.set_major_formatter(ticker.FuncFormatter(human_format))
-
+        a.set_xlabel("Time [min]")
     else:
         dfgtot = []
 
