@@ -4,7 +4,7 @@ PATH_SYMUVIA="/home/ladino/dev-symuvia/build/lib/libSymuVia.so"
 
 # Case Open Loop 
 
-case = "OPENL"
+case="OPENL"
 
 echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55.ipynb \
 -p PATH_SYMUVIA ${PATH_SYMUVIA} \
