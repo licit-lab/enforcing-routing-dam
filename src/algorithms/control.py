@@ -288,7 +288,7 @@ class ComputeVanishingControl:
             proportional = self.kP * errorState
 
             # Differential
-            differential = self.kP * self.Td * self.derivator(errorState)
+            differential = self.kP * self.Td * self.derivator(errorState) * (errorState < 0.5)
 
             # Control
             control = proportional + differential
@@ -377,7 +377,7 @@ class ComputeVanishingControl:
             localControl = np.clip(normError, self.uMin, self.uMax)
 
             # Cooperative (epsilon)
-            neighControl = self.beta * (normError -  A @ normError / d)
+            neighControl = self.beta * (np.minimum(normError, 0) - A @ np.minimum(normError, 0) / d)
 
             # Memory control
             self.errorSignal.append(normError)
@@ -407,7 +407,7 @@ class ComputeVanishingControl:
             localControl = np.clip(normError, self.uMin, self.uMax)
 
             # Cooperative term
-            neighControl = self.kP * epsilon * A @ normError / d
+            neighControl = self.kP * epsilon * A @ np.minimum(normError, 0) / d
 
             # Memory control
             self.errorSignal.append(normError)
