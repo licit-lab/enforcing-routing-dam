@@ -377,7 +377,7 @@ class ComputeVanishingControl:
             localControl = np.clip(normError, self.uMin, self.uMax)
 
             # Cooperative (epsilon)
-            neighControl = self.beta * (np.minimum(normError, 0) - A @ np.minimum(normError, 0) / d)
+            neighControl = self.beta * (np.maximum(normError, 0) - A @ np.maximum(normError, 0) / d)
 
             # Memory control
             self.errorSignal.append(normError)
@@ -407,7 +407,7 @@ class ComputeVanishingControl:
             localControl = np.clip(normError, self.uMin, self.uMax)
 
             # Cooperative term
-            neighControl = self.kP * epsilon * A @ np.minimum(normError, 0) / d
+            neighControl = self.kP * epsilon * A @ np.maximum(normError, 0) / d
 
             # Memory control
             self.errorSignal.append(normError)
