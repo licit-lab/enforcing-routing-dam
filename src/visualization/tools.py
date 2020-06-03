@@ -126,7 +126,15 @@ def plot_variable_cases(
     """ 
         Plots data for a specfic variable and multiple cases 
     """
-    dct_var = {"spd": "Speed", "ctr": "Control", "ttt": "Total Travel Time", "ttd": "Total Travel Distance"}
+    dct_var = {
+        "spd": "Speed",
+        "ctr": "Control",
+        "ttt": "Total Travel Time",
+        "ttd": "Total Travel Distance",
+        "err": "Error signal",
+        "coop": "Cooperative Component",
+        "local": "Local Component",
+    }
 
     df_lst = []
     for case in cases:
@@ -170,7 +178,7 @@ def plot_variable_cases(
     fig.tight_layout()
     fig.subplots_adjust(top=0.95)
 
-    if variable != "ctr":
+    if variable not in ("ctr", "err", "coop","local"):
         fig, a = plt.subplots()
         dfg_lst = []
         for case in cases:
