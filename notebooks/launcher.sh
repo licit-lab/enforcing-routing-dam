@@ -172,13 +172,13 @@ case="P"
 
 for k in 200 400 800 1200 1600
 do
-    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${k}.ipynb \
+    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_DTS_${k}.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
     -p EXPERIMENT CTR_SCN1DST_${k} \
     -p CTR_ALG ${case} \
     -p KP 0.2 \
     -p DISTANCE_CONTROL ${k} &"
-    papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${k}.ipynb \
+    papermill 01_Zone_Control.ipynb 01_Zone_Control_DST_${k}.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
     -p EXPERIMENT CTR_SCN1KP_${k} \
     -p CTR_ALG ${case} \
