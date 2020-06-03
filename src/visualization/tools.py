@@ -179,7 +179,7 @@ def plot_variable_cases(
     fig.subplots_adjust(top=0.95)
 
     if variable not in ("ctr", "err", "coop", "local"):
-        fig, a = plt.subplots(figsize=(30, 20))
+        fig, a = plt.subplots(figsize=(20, 10))
         dfg_lst = []
         for case in cases:
             dfg = pd.read_csv(file_path + "/" + case + "/" + variable + "G" + ".csv")
@@ -198,6 +198,15 @@ def plot_variable_cases(
             dfgtot1.plot(
                 ax=a, title=dct_var.get(variable, ""), grid=True,
             )
+            if variable == "ttt":
+                legend_data = (dfgtot.loc[:, dfgtot.columns != "NoCtr"].sum() - dfgtot.NoCtr.sum()).divide(
+                    dfgtot.NoCtr.sum()
+                ) * 100
+                legend_values = [f"{a}: {b:.2f} %" for a, b in zip(legend_data.index, legend_data.values)]
+                L = plt.legend()
+                text_list = L.get_texts()
+                for ct, nt in zip(text_list, legend_values):
+                    ct.set_text(nt)
             dfgtot2.plot(ax=a, title=dct_var.get(variable, ""), grid=True, color="black", linestyle="--", linewidth=1.5)
         except (IndexError, KeyError):
             dfgtot1 = dfgtot
