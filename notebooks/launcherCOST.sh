@@ -5,6 +5,8 @@ IT=0
 
 # Test 3 cooperative strategies 
 
+# Scenario A
+
 for case in COST1 COST2 COST3
 do
     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_5x5_cost_dA.ipynb \
