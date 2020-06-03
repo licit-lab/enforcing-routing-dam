@@ -178,8 +178,8 @@ def plot_variable_cases(
     fig.tight_layout()
     fig.subplots_adjust(top=0.95)
 
-    if variable not in ("ctr", "err", "coop","local"):
-        fig, a = plt.subplots()
+    if variable not in ("ctr", "err", "coop", "local"):
+        fig, a = plt.subplots(figsize=(30, 20))
         dfg_lst = []
         for case in cases:
             dfg = pd.read_csv(file_path + "/" + case + "/" + variable + "G" + ".csv")
