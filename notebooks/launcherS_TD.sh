@@ -3,7 +3,9 @@
 PATH_SYMUVIA="/home/ladino/dev-symuvia/build/lib/libSymuVia.so"
 IT=0
 
-# Test Sensitivity Kd
+# Test Sensitivity Td
+
+# Scenario A 
 
 case="PD"
 
