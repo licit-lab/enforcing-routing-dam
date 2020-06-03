@@ -1,21 +1,135 @@
 #!/usr/bash
 
-PATH_SYMUVIA="/home/ladino/dev-symuvia/build/lib/libSymuVia.so"
 
 # Case Open Loop 
+case="OPENL"
 
-# case="OPENL"
+# Scenario A
+echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_5x5_dA.ipynb \
+-p PATH_SYMUVIA ${PATH_SYMUVIA} \
+-p EXPERIMENT CTR_SCNA${case} \
+-p CTR_ALG ${case} \
+-p CONTROL_MODE ${case} \
+-p FILE "manhattan_grid_5X5_A.xml" \
+-p DEMAND_FILE "demand_scenario_A.csv" &"
 
-# echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55.ipynb \
-# -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-# -p EXPERIMENT CTR_SCN1${case} \
-# -p CTR_ALG ${case} \
-# -p CONTROL_MODE ${case} &"
-#     papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55.ipynb \
-# -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-# -p EXPERIMENT CTR_SCN1${case} \
-# -p CTR_ALG ${case} \
-# -p CONTROL_MODE ${case} &
+IT=$((IT+1))
+
+# Scenario B
+echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_5x5_dB.ipynb \
+-p PATH_SYMUVIA ${PATH_SYMUVIA} \
+-p EXPERIMENT CTR_SCNB${case} \
+-p CTR_ALG ${case} \
+-p CONTROL_MODE ${case} \
+-p FILE "manhattan_grid_5X5_B.xml" \
+-p DEMAND_FILE "demand_scenario_B.csv" &"
+
+IT=$((IT+1))
+
+# Sensitivity Kp: 
+
+# Scenario A 
+
+case="P"
+
+for k in  0.01 0.05 0.1 0.15 0.2
+do
+    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${k}_dA.ipynb \
+    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_SCNAKP_${k} \
+    -p CTR_ALG ${case} \
+    -p KP ${k} \
+    -p FILE "manhattan_grid_5X5_A.xml" \
+    -p DEMAND_FILE "demand_scenario_A.csv" &"
+    IT=$((IT+1))
+done
+
+# Scenario B
+
+for k in  0.01 0.05 0.1 0.15 0.2
+do
+    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${k}_dB.ipynb \
+    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_SCNBKP_${k} \
+    -p CTR_ALG ${case} \
+    -p KP ${k} \
+    -p FILE "manhattan_grid_5X5_B.xml" \
+    -p DEMAND_FILE "demand_scenario_B.csv" &"
+    IT=$((IT+1))
+done
+
+# Sensitivity Distance:
+
+# Scenario A
+
+case="P"
+
+for k in 200 400 800 1200 1600
+do
+    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_DST_${k}_dA.ipynb \
+    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_SCNADST_${k} \
+    -p CTR_ALG ${case} \
+    -p KP 0.2 \
+    -p DISTANCE_CONTROL ${k} \
+    -p FILE "manhattan_grid_5X5_A.xml" \
+    -p DEMAND_FILE "demand_scenario_A.csv" &"
+    IT=$((IT+1))
+done
+
+# Test Sensitivity Td
+
+# Scenario A
+
+case="PD"
+
+for k in 100 200 300 400 500
+do
+    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}_dA.ipynb \
+    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_SCNATD_${k} \
+    -p CTR_ALG ${case} \
+    -p KP 0.2 \
+    -p TD ${k} \
+    -p FILE "manhattan_grid_5X5_A.xml" \
+    -p DEMAND_FILE "demand_scenario_A.csv" &"
+    IT=$((IT+1))   
+done
+
+
+# Sensitivity Beta - Cooperative 3: 
+
+# Scenario A
+
+case="COPNL"
+
+for k in 0.1 0.2 0.3 0.4 0.5
+do
+    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_BETA_${k}_dA.ipynb \
+    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_SCNABETA_${k} \
+    -p CTR_ALG ${case} \
+    -p BETA ${k} \
+    -p FILE "manhattan_grid_5X5_A.xml" \
+    -p DEMAND_FILE "demand_scenario_A.csv" &"
+    IT=$((IT+1))
+done
+
+# Test 3 cooperative strategies 
+
+# Scenario A
+
+for case in COST1 COST2 COST3
+do
+    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_5x5_cost_dA.ipynb \
+    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_SCNACOST_${case} \
+    -p CTR_ALG ${case} \
+    -p SELFISH 0.7 \
+    -p FILE "manhattan_grid_5X5_A.xml" \
+    -p DEMAND_FILE "demand_scenario_A.csv" &"
+    IT=$((IT+1))  
+done  
 
 # Test Network 5x5 
 
@@ -64,45 +178,6 @@ PATH_SYMUVIA="/home/ladino/dev-symuvia/build/lib/libSymuVia.so"
 #     -p SELFISH 0.7 &
 # done  
 
-
-# Test Network 5x5  New cooperative algorithms 
-
-# Test 3 cooperative strategies with selfishness 0.7
-
-# for case in COST1 COST2 COST3
-# do
-#     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_newco07.ipynb \
-#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-#     -p EXPERIMENT CTR_NEWCO07_${case} \
-#     -p CTR_ALG ${case} \
-#     -p CO_KP 0.2 \
-#     -p SELFISH 0.7 &"
-#     papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_newco07.ipynb \
-#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-#     -p EXPERIMENT CTR_NEWCO07_${case} \
-#     -p CTR_ALG ${case} \
-#     -p CO_KP 0.2 \
-#     -p SELFISH 0.7 &
-# done  
-
-# Test 3 cooperative strategies 
-
-for case in COST1 COST2 COST3
-do
-    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_newco.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_SCN1NEWCO_${case} \
-    -p CTR_ALG ${case} \
-    -p CO_KP 0.2 \
-    -p SELFISH 0.7 &"
-    papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_newco.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_SCN1NEWCO_${case} \
-    -p CTR_ALG ${case} \
-    -p CO_KP 0.2 \
-    -p SELFISH 0.7 &
-done  
-
 # Test Network 3x3
 
 # for case in CO_P CO_PI P PI OPENL
@@ -150,43 +225,6 @@ done
 #    fi
 # done
 
-# Test P for P control 
-
-case="P"
-
-for k in  0.01 0.05 0.1 0.15 0.2
-do
-    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${k}.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_SCN1KP_${k} \
-    -p CTR_ALG ${case} \
-    -p KP ${k} &"
-    papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${k}.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_SCN1KP_${k} \
-    -p CTR_ALG ${case} \
-    -p KP ${k} &
-done
-
-# case="P"
-
-# for k in 200 400 800 1200 1600
-# do
-#     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_DTS_${k}.ipynb \
-#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-#     -p EXPERIMENT CTR_SCN1DST_${k} \
-#     -p CTR_ALG ${case} \
-#     -p KP 0.2 \
-#     -p DISTANCE_CONTROL ${k} &"
-#     papermill 01_Zone_Control.ipynb 01_Zone_Control_DST_${k}.ipynb \
-#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-#     -p EXPERIMENT CTR_SCN1DST_${k} \
-#     -p CTR_ALG ${case} \
-#     -p KP 0.2 \
-#     -p DISTANCE_CONTROL ${k} &
-# done
-
-
 # case="PI"
 
 # for k in 200 360 400 500 1000
@@ -222,27 +260,6 @@ done
 #     -p TI 1200 \
 #     -p TWD ${k} &
 # done
-
-# Test Sensitivity Kd
-
-case="PD"
-
-for k in 50 100 200 300 400
-do
-    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_SCN1TD_${k} \
-    -p CTR_ALG ${case} \
-    -p KP 0.2 \
-    -p TD ${k} &"
-    papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_SCN1TD_${k} \
-    -p CTR_ALG ${case} \
-    -p KP 0.2 \
-    -p TD ${k} &
-done
-
 
 # Test Cooperative level 
 
@@ -280,20 +297,4 @@ done
 #     -p CO_KP ${k} &
 # done
 
-# Test Cooperative level KP
-
-case="COPNL"
-
-for k in 0.1 0.2 0.3 0.4 0.5
-do
-    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_COBET_${k}.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_SCN1COBET_${k} \
-    -p CTR_ALG ${case} \
-    -p BETA ${k} &"
-    papermill 01_Zone_Control.ipynb 01_Zone_Control_COBET_${k}.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_SCN1COBET_${k} \
-    -p CTR_ALG ${case} \
-    -p BETA ${k} &
-done
+echo "Total Simulations: ${IT}"
