@@ -180,7 +180,7 @@ do
     -p DISTANCE_CONTROL ${k} &"
     papermill 01_Zone_Control.ipynb 01_Zone_Control_DST_${k}.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_SCN1KP_${k} \
+    -p EXPERIMENT CTR_SCN1DST_${k} \
     -p CTR_ALG ${case} \
     -p KP 0.2 \
     -p DISTANCE_CONTROL ${k} &
