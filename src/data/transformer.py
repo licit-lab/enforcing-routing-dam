@@ -12,7 +12,7 @@ def extract_veh_data(demand, time):
         demand should predefined
     """
     # Filter
-    creation_query = f"{time}<=creation<={time+1}"
+    creation_query = f"{time} < creation<={time+1}"
     current_demand = demand.query(creation_query)
 
     # Generator
