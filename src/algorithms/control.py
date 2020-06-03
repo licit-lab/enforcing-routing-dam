@@ -288,7 +288,7 @@ class ComputeVanishingControl:
             proportional = self.kP * errorState
 
             # Differential
-            differential = self.kP * self.Td * self.derivator(errorState) * (errorState < 0.5)
+            differential = self.kP * self.Td * self.derivator(errorState) * (errorState < -0.5)
 
             # Control
             control = proportional + differential

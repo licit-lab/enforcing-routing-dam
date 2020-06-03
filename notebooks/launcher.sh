@@ -87,21 +87,21 @@ PATH_SYMUVIA="/home/ladino/dev-symuvia/build/lib/libSymuVia.so"
 
 # Test 3 cooperative strategies 
 
-# for case in COST1 COST2 COST3
-# do
-#     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_newco.ipynb \
-#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-#     -p EXPERIMENT CTR_SCN1NEWCO_${case} \
-#     -p CTR_ALG ${case} \
-#     -p CO_KP 0.2 \
-#     -p SELFISH 0.7 &"
-#     papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_newco.ipynb \
-#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-#     -p EXPERIMENT CTR_SCNNEWCO_${case} \
-#     -p CTR_ALG ${case} \
-#     -p CO_KP 0.2 \
-#     -p SELFISH 0.7 &
-# done  
+for case in COST1 COST2 COST3
+do
+    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_newco.ipynb \
+    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_SCN1NEWCO_${case} \
+    -p CTR_ALG ${case} \
+    -p CO_KP 0.2 \
+    -p SELFISH 0.7 &"
+    papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_55_newco.ipynb \
+    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_SCN1NEWCO_${case} \
+    -p CTR_ALG ${case} \
+    -p CO_KP 0.2 \
+    -p SELFISH 0.7 &
+done  
 
 # Test Network 3x3
 
@@ -152,39 +152,39 @@ PATH_SYMUVIA="/home/ladino/dev-symuvia/build/lib/libSymuVia.so"
 
 # Test P for P control 
 
-# case="P"
-
-# for k in  0.01 0.05 0.1 0.15 0.2
-# do
-#     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${k}.ipynb \
-#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-#     -p EXPERIMENT CTR_SCN1KP_${k} \
-#     -p CTR_ALG ${case} \
-#     -p KP ${k} &"
-#     papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${k}.ipynb \
-#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-#     -p EXPERIMENT CTR_SCN1KP_${k} \
-#     -p CTR_ALG ${case} \
-#     -p KP ${k} &
-# done
-
 case="P"
 
-for k in 200 400 800 1200 1600
+for k in  0.01 0.05 0.1 0.15 0.2
 do
-    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_DTS_${k}.ipynb \
+    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${k}.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_SCN1DST_${k} \
+    -p EXPERIMENT CTR_SCN1KP_${k} \
     -p CTR_ALG ${case} \
-    -p KP 0.2 \
-    -p DISTANCE_CONTROL ${k} &"
-    papermill 01_Zone_Control.ipynb 01_Zone_Control_DST_${k}.ipynb \
+    -p KP ${k} &"
+    papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${k}.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_SCN1DST_${k} \
+    -p EXPERIMENT CTR_SCN1KP_${k} \
     -p CTR_ALG ${case} \
-    -p KP 0.2 \
-    -p DISTANCE_CONTROL ${k} &
+    -p KP ${k} &
 done
+
+# case="P"
+
+# for k in 200 400 800 1200 1600
+# do
+#     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_DTS_${k}.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p EXPERIMENT CTR_SCN1DST_${k} \
+#     -p CTR_ALG ${case} \
+#     -p KP 0.2 \
+#     -p DISTANCE_CONTROL ${k} &"
+#     papermill 01_Zone_Control.ipynb 01_Zone_Control_DST_${k}.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p EXPERIMENT CTR_SCN1DST_${k} \
+#     -p CTR_ALG ${case} \
+#     -p KP 0.2 \
+#     -p DISTANCE_CONTROL ${k} &
+# done
 
 
 # case="PI"
@@ -225,23 +225,23 @@ done
 
 # Test Sensitivity Kd
 
-# case="PD"
+case="PD"
 
-# for k in 50 100 200 300 400
-# do
-#     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}.ipynb \
-#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-#     -p EXPERIMENT CTR_SCN1TD_${k} \
-#     -p CTR_ALG ${case} \
-#     -p KP 0.2 \
-#     -p TD ${k} &"
-#     papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}.ipynb \
-#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-#     -p EXPERIMENT CTR_SCN1TD_${k} \
-#     -p CTR_ALG ${case} \
-#     -p KP 0.2 \
-#     -p TD ${k} &
-# done
+for k in 50 100 200 300 400
+do
+    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}.ipynb \
+    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_SCN1TD_${k} \
+    -p CTR_ALG ${case} \
+    -p KP 0.2 \
+    -p TD ${k} &"
+    papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}.ipynb \
+    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_SCN1TD_${k} \
+    -p CTR_ALG ${case} \
+    -p KP 0.2 \
+    -p TD ${k} &
+done
 
 
 # Test Cooperative level 
@@ -282,18 +282,18 @@ done
 
 # Test Cooperative level KP
 
-# case="COPNL"
+case="COPNL"
 
-# for k in 0.1 0.2 0.3 0.4 0.5
-# do
-#     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_COBET_${k}.ipynb \
-#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-#     -p EXPERIMENT CTR_SCNCOBET_${k} \
-#     -p CTR_ALG ${case} \
-#     -p BETA ${k} &"
-#     papermill 01_Zone_Control.ipynb 01_Zone_Control_COBET_${k}.ipynb \
-#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-#     -p EXPERIMENT CTR_SCNCOBET_${k} \
-#     -p CTR_ALG ${case} \
-#     -p BETA ${k} &
-# done
+for k in 0.1 0.2 0.3 0.4 0.5
+do
+    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_COBET_${k}.ipynb \
+    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_SCN1COBET_${k} \
+    -p CTR_ALG ${case} \
+    -p BETA ${k} &"
+    papermill 01_Zone_Control.ipynb 01_Zone_Control_COBET_${k}.ipynb \
+    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT CTR_SCN1COBET_${k} \
+    -p CTR_ALG ${case} \
+    -p BETA ${k} &
+done
