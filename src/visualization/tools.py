@@ -167,7 +167,8 @@ def plot_variable_cases(
             dfplt1.index = dfplt1.index * 3  # Minutes
             dfplt1.plot(ax=a, title=c1, grid=True)
         # Minutes
-        # a.set_ylim([0, dftot.max().max() + 0.1])
+        if variable in ("ctr", "coop", "local"):
+            a.set_ylim([0, dftot.max().max() + 0.1])
         a.yaxis.set_major_formatter(ticker.FuncFormatter(human_format))
         a.set_xlabel("Time [min]")
         if i >= n_sensors:
