@@ -183,29 +183,30 @@ class ComputeVanishingControl:
         A class to compute control law
     """
 
-    def __init__(
-        self,
-        G: nx.Graph,
-        samplingTime: float = TS,
-        kP: float = 1,
-        Ti: float = 360,
-        Td: float = 0.5,
-        Twd: float = 720,
-        beta: float = 0.3,
-        typeCtrl="COP",
-    ) -> None:
+    def __init__(self, G: nx.Graph, samplingTime: float = TS, dctPar: dict = {}) -> None:
         self.N = len(G.nodes)
+
+        # States
         self.integrator = Integrator(self.N, samplingTime)
         self.derivator = Derivator(self.N, samplingTime)
+        self.derivatorCO = Derivator(self.N, samplingTime)
+        self.windReset = np.zeros((1, self.N))
+
+        # Boundaries
         self.uMax = 1
         self.uMin = 0
-        self.kP = kP
-        self.Ti = Ti
-        self.Td = Td
-        self.typeCtr = typeCtrl
-        self.Twd = Twd
-        self.windReset = np.zeros((1, self.N))
-        self.beta = beta
+
+        # Control Parameters
+        self.typeCtr = dctPar.get("CTR_ALG", "P")
+        self.kP = dctPar.get("KP", 0.15)
+        self.Ti = dctPar.get("TI", 1200)
+        self.Td = dctPar.get("TD", 300)
+        self.Twd = dctPar.get("TWD", 360)
+        self.COkP = dctPar.get("COP", 0.15)
+        self.COTi = dctPar.get("COTI", 1200)
+        self.COTd = dctPar.get("COTD", 300)
+        self.COTwd = dctPar.get("COTWD", 360)
+        self.beta = dctPar.get("BETA", 0.3)
 
         # Memory
         self.uKI = []
@@ -419,6 +420,78 @@ class ComputeVanishingControl:
                 neighControl, self.uMin, self.uMax
             )
 
+        elif self.typeCtr in ("COPD1", "COST5"):
+
+            # Compute error
+            errorState = np.array([G.nodes[s]["freeFlowSpeed"] - speeds[-1][s] for s in G.nodes])
+
+            # Normalized states
+            normState = np.array([speeds[-1][s] / G.nodes[s]["freeFlowSpeed"] for s in G.nodes])
+
+            # Proportional
+            proportional = self.kP * errorState
+
+            # Differential
+            differential = self.kP * self.Td * self.derivator(errorState) * (errorState < -0.5)
+
+            # Local Control
+            control = proportional + differential
+
+            # Network data
+            _, L, epsilon, _, _ = get_graph_data(G)  # Works because the graph is small
+
+            # Compute neighbor information
+            proportionalCO = self.COkP * L @ normState
+
+            # Cooperative term
+            neighControl = proportionalCO
+
+            # Memory control
+            self.errorSignal.append(errorState)
+            self.localU.append(localControl)
+            self.coopU.append(neighControl)
+
+            # Total control law
+            totalControl = G.graph["self"] * localControl + (1 - G.graph["self"]) * np.clip(
+                neighControl, self.uMin, self.uMax
+            )
+
+        elif self.typeCtr in ("COPD2", "COST6"):
+
+            # Compute error
+            errorState = np.array([G.nodes[s]["freeFlowSpeed"] - speeds[-1][s] for s in G.nodes])
+
+            # Normalized states
+            normState = np.array([speeds[-1][s] / G.nodes[s]["freeFlowSpeed"] for s in G.nodes])
+
+            # Proportional
+            proportional = self.kP * errorState
+
+            # Differential
+            differential = self.kP * self.Td * self.derivator(errorState) * (errorState < -0.5)
+
+            # Local Control
+            control = proportional + differential
+
+            # Network data
+            _, L, epsilon, _, _ = get_graph_data(G)  # Works because the graph is small
+
+            # Compute neighbor information
+            proportionalCO = self.kP * L @ normState
+            differentialCO = self.kP * self.Td * self.derivatorCO(L @ normState)
+
+            # Cooperative term
+            neighControl = proportionalCO + differentialCO
+
+            # Memory control
+            self.errorSignal.append(errorState)
+            self.localU.append(localControl)
+            self.coopU.append(neighControl)
+
+            # Total control law
+            totalControl = G.graph["self"] * localControl + (1 - G.graph["self"]) * np.clip(
+                neighControl, self.uMin, self.uMax
+            )
         else:
             pass
 
