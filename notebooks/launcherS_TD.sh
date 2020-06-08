@@ -40,7 +40,7 @@ for k in 200 250 300 350 400 500
 do
     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}_dB.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_SCNATD_${k} \
+    -p EXPERIMENT CTR_SCNBTD_${k} \
     -p CTR_ALG ${case} \
     -p KP 0.15 \
     -p TD ${k} \
