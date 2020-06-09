@@ -6,39 +6,56 @@ IT=0
 # Case Open Loop 
 case="OPENL"
 
-# Scenario A
-echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_5x5_dA.ipynb \
--p PATH_SYMUVIA ${PATH_SYMUVIA} \
--p EXPERIMENT CTR_SCNA${case} \
--p CTR_ALG ${case} \
--p CONTROL_MODE ${case} \
--p FILE "manhattan_grid_5X5_A.xml" \
--p DEMAND_FILE "demand_scenario_A.csv" &"
-papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_5x5_dA.ipynb \
--p PATH_SYMUVIA ${PATH_SYMUVIA} \
--p EXPERIMENT CTR_SCNA${case} \
--p CTR_ALG ${case} \
--p CONTROL_MODE ${case} \
--p FILE "manhattan_grid_5X5_A.xml" \
--p DEMAND_FILE "demand_scenario_A.csv" &
+# # Scenario A
+# echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_5x5_dA.ipynb \
+# -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+# -p EXPERIMENT CTR_SCNA${case} \
+# -p CTR_ALG ${case} \
+# -p CONTROL_MODE ${case} \
+# -p FILE "manhattan_grid_5X5_A.xml" \
+# -p DEMAND_FILE "demand_scenario_A.csv" &"
+# papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_5x5_dA.ipynb \
+# -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+# -p EXPERIMENT CTR_SCNA${case} \
+# -p CTR_ALG ${case} \
+# -p CONTROL_MODE ${case} \
+# -p FILE "manhattan_grid_5X5_scenario_A.xml" \
+# -p DEMAND_FILE "demand_scenario_A.csv" &
 
-IT=$((IT+1))
+# IT=$((IT+1))
 
-# Scenario B
-echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_5x5_dB.ipynb \
+# # Scenario B
+# echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_5x5_dB.ipynb \
+# -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+# -p EXPERIMENT CTR_SCNB${case} \
+# -p CTR_ALG ${case} \
+# -p CONTROL_MODE ${case} \
+# -p FILE "manhattan_grid_5X5_B.xml" \
+# -p DEMAND_FILE "demand_scenario_B.csv" &"
+# papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_5x5_dB.ipynb \
+# -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+# -p EXPERIMENT CTR_SCNB${case} \
+# -p CTR_ALG ${case} \
+# -p CONTROL_MODE ${case} \
+# -p FILE "manhattan_grid_5X5_scenario_B.xml" \
+# -p DEMAND_FILE "demand_scenario_B.csv" &
+
+
+# Scenario C
+echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_5x5_dC.ipynb \
 -p PATH_SYMUVIA ${PATH_SYMUVIA} \
--p EXPERIMENT CTR_SCNB${case} \
+-p EXPERIMENT CTR_SCNC${case} \
 -p CTR_ALG ${case} \
 -p CONTROL_MODE ${case} \
--p FILE "manhattan_grid_5X5_B.xml" \
--p DEMAND_FILE "demand_scenario_B.csv" &"
-papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_5x5_dB.ipynb \
+-p FILE "manhattan_grid_5X5_scenario_C.xml" \
+-p DEMAND_FILE "demand_scenario_C.csv" &"
+papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_5x5_dC.ipynb \
 -p PATH_SYMUVIA ${PATH_SYMUVIA} \
--p EXPERIMENT CTR_SCNB${case} \
+-p EXPERIMENT CTR_SCNC${case} \
 -p CTR_ALG ${case} \
 -p CONTROL_MODE ${case} \
--p FILE "manhattan_grid_5X5_B.xml" \
--p DEMAND_FILE "demand_scenario_B.csv" &
+-p FILE "manhattan_grid_5X5_scenario_C.xml" \
+-p DEMAND_FILE "demand_scenario_C.csv" &
 
 IT=$((IT+1))
 
