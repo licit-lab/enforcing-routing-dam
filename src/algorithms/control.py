@@ -5,6 +5,7 @@
 import numpy as np
 import networkx as nx
 from scipy.sparse import csr_matrix
+from scipy.linalg import block_diag
 from itertools import repeat
 
 # ======================================================================================================================
@@ -289,7 +290,7 @@ class ComputeVanishingControl:
             proportional = self.kP * errorState
 
             # Differential
-            differential = self.kP * self.Td * self.derivator(errorState) * (errorState < -0.5)
+            differential = self.kP * self.Td * self.derivator(errorState) * (errorState > -0.5)
 
             # Control
             control = proportional + differential
@@ -363,16 +364,13 @@ class ComputeVanishingControl:
 
         elif self.typeCtr in ("COPNL", "COST3"):
 
-            # Network data
-            _, L, epsilon, A, D = get_graph_data(G)  # Works because the graph is small
-
-            # Find degrees vector
-            d = np.array(list(D.values()))
-
             # Compute error
             normError = np.array(
                 [(G.nodes[s]["freeFlowSpeed"] - speeds[-1][s]) / G.nodes[s]["freeFlowSpeed"] for s in G.nodes]
             )
+
+            # Adjacency / Degree
+            A, d = self.computeActiveNeighbors(G, normError)
 
             # Local control
             localControl = np.clip(normError, self.uMin, self.uMax)
@@ -432,10 +430,10 @@ class ComputeVanishingControl:
             proportional = self.kP * errorState
 
             # Differential
-            differential = self.kP * self.Td * self.derivator(errorState) * (errorState < -0.5)
+            differential = self.kP * self.Td * self.derivator(errorState) * (errorState > -0.5)
 
             # Local Control
-            control = proportional + differential
+            localControl = proportional + differential
 
             # Network data
             _, L, epsilon, _, _ = get_graph_data(G)  # Works because the graph is small
@@ -471,14 +469,14 @@ class ComputeVanishingControl:
             differential = self.kP * self.Td * self.derivator(errorState) * (errorState < -0.5)
 
             # Local Control
-            control = proportional + differential
+            localControl = proportional + differential
 
             # Network data
             _, L, epsilon, _, _ = get_graph_data(G)  # Works because the graph is small
 
             # Compute neighbor information
-            proportionalCO = self.kP * L @ normState
-            differentialCO = self.kP * self.Td * self.derivatorCO(L @ normState)
+            proportionalCO = self.COkP * L @ normState
+            differentialCO = self.COkP * self.COTd * self.derivatorCO(L @ normState)
 
             # Cooperative term
             neighControl = proportionalCO + differentialCO
@@ -536,3 +534,26 @@ class ComputeVanishingControl:
         if self.typeCtr in ("PD",):
             return dict(zip(self.zones, self.derivator.dx[-1]))
         return dict(zip(self.zones, [] * self.N))
+
+    def computeActiveNeighbors(self, G, errorState):
+
+        # Congested neighbors
+        activeNeighbors = errorState > 0
+
+        # Pertutation matrix
+        permMatrix = block_diag(*activeNeighbors)
+
+        # Data Graph
+        _, _, _, A, _ = get_graph_data(G)
+
+        # New adjacency matrix
+        APerm = A @ permMatrix
+
+        # New degree
+        DPerm = np.sum(APerm, axis=1).reshape(self.N, 1)
+
+        # Feasibility operation
+        # A @ err instead of A @ error / d
+        DPerm[DPerm == 0] = 1
+
+        return APerm, DPerm
