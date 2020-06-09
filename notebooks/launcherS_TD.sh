@@ -11,23 +11,23 @@ case="PD"
 
 for k in 200 250 300 350 400 500
 do
-    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}_dA.ipynb \
+    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}_SCNAK05D800.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_SCNATD_${k} \
+    -p EXPERIMENT STD_SCNAK05D800_${k} \
     -p CTR_ALG ${case} \
-    -p KP 0.15 \
+    -p KP 0.5 \
     -p TD ${k} \
-    -p FILE "manhattan_grid_5X5_A.xml" \
+    -p FILE "manhattan_grid_5X5_scenario_A.xml" \
     -p DEMAND_FILE "demand_scenario_A.csv" &"
     IT=$((IT+1))
-    papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}_dA.ipynb \
+    papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}_SCNAK05D800.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_SCNATD_${k} \
+    -p EXPERIMENT STD_SCNAK05D800_${k} \
     -p CTR_ALG ${case} \
-    -p KP 0.15 \
+    -p KP 0.5 \
     -p TD ${k} \
-    -p FILE "manhattan_grid_5X5_A.xml" \
-    -p DEMAND_FILE "demand_scenario_A.csv" &        
+    -p FILE "manhattan_grid_5X5_scenario_A.xml" \
+    -p DEMAND_FILE "demand_scenario_A.csv" &    
 done
 
 echo "Total Simulations: ${IT}"
@@ -38,23 +38,23 @@ case="PD"
 
 for k in 200 250 300 350 400 500
 do
-    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}_dB.ipynb \
+    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}_SCNBK05D800.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_SCNBTD_${k} \
+    -p EXPERIMENT STD_SCNBK05D800_${k} \
     -p CTR_ALG ${case} \
-    -p KP 0.15 \
+    -p KP 0.5 \
     -p TD ${k} \
-    -p FILE "manhattan_grid_5X5_B.xml" \
+    -p FILE "manhattan_grid_5X5_scenario_B.xml" \
     -p DEMAND_FILE "demand_scenario_B.csv" &"
     IT=$((IT+1))
-    papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}_dB.ipynb \
+    papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}_SCNBK05D800.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT CTR_SCNBTD_${k} \
+    -p EXPERIMENT STD_SCNBK05D800_${k} \
     -p CTR_ALG ${case} \
-    -p KP 0.15 \
+    -p KP 0.5 \
     -p TD ${k} \
-    -p FILE "manhattan_grid_5X5_B.xml" \
-    -p DEMAND_FILE "demand_scenario_B.csv" &       
+    -p FILE "manhattan_grid_5X5_scenario_B.xml" \
+    -p DEMAND_FILE "demand_scenario_B.csv" &   
 done
 
 echo "Total Simulations: ${IT}"
