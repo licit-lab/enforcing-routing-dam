@@ -66,7 +66,7 @@ do
     -p EXPERIMENT SKP_SCNCD800_${k} \
     -p CTR_ALG ${case} \
     -p KP ${k} \
-    -p FILE "manhattan_grid_5X5_C.xml" \
+    -p FILE "manhattan_grid_5X5_scenario_C.xml" \
     -p DEMAND_FILE "demand_scenario_C.csv" &   
 done
 
