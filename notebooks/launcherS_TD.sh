@@ -9,7 +9,7 @@ IT=0
 
 case="PD"
 
-for k in 200 250 300 350 400 500
+for k in 100 200 250 300 350 400 500
 do
     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}_SCNAK05D800.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
@@ -36,7 +36,7 @@ echo "Total Simulations: ${IT}"
 
 case="PD"
 
-for k in 200 250 300 350 400 500
+for k in 100 200 250 300 350 400 500
 do
     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}_SCNBK05D800.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
@@ -55,6 +55,31 @@ do
     -p TD ${k} \
     -p FILE "manhattan_grid_5X5_scenario_B.xml" \
     -p DEMAND_FILE "demand_scenario_B.csv" &   
+done
+
+# Scenario C
+
+case="PD"
+
+for k in 100 200 250 300 350 400 500
+do
+    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}_SCNCK05D800.ipynb \
+    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT STD_SCNCK05D800_${k} \
+    -p CTR_ALG ${case} \
+    -p KP 0.5 \
+    -p TD ${k} \
+    -p FILE "manhattan_grid_5X5_scenario_C.xml" \
+    -p DEMAND_FILE "demand_scenario_C.csv" &"
+    IT=$((IT+1))
+    papermill 01_Zone_Control.ipynb 01_Zone_Control_TD_${k}_SCNCK05D800.ipynb \
+    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+    -p EXPERIMENT STD_SCNCK05D800_${k} \
+    -p CTR_ALG ${case} \
+    -p KP 0.5 \
+    -p TD ${k} \
+    -p FILE "manhattan_grid_5X5_scenario_C.xml" \
+    -p DEMAND_FILE "demand_scenario_C.csv" &
 done
 
 echo "Total Simulations: ${IT}"
