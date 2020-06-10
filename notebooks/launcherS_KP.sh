@@ -51,7 +51,7 @@ do
     -p CTR_ALG ${case} \
     -p KP ${k} \
     -p DISTANCE_CONTROL 400 \
-    -p FILE "manhattan_grid_5X5_B.xml" \
+    -p FILE "manhattan_grid_5X5_scenario_B.xml" \
     -p DEMAND_FILE "demand_scenario_B.csv" &     
 done
 
@@ -66,7 +66,7 @@ do
     -p CTR_ALG ${case} \
     -p KP ${k} \
     -p DISTANCE_CONTROL 400 \
-    -p FILE "manhattan_grid_5X5_C.xml" \
+    -p FILE "manhattan_grid_5X5_scenario_C.xml" \
     -p DEMAND_FILE "demand_scenario_C.csv" &"
     IT=$((IT+1))
     papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${k}_SCNCD400.ipynb \
@@ -75,7 +75,7 @@ do
     -p CTR_ALG ${case} \
     -p KP ${k} \
     -p DISTANCE_CONTROL 400 \
-    -p FILE "manhattan_grid_5X5_C.xml" \
+    -p FILE "manhattan_grid_5X5_scenario_C.xml" \
     -p DEMAND_FILE "demand_scenario_C.csv" & 
 done
 
