@@ -419,7 +419,7 @@ class ComputeVanishingControl:
             A, d = self.computeActiveNeighbors(G, normError)
 
             # Cooperative term
-            neighControl = np.clip(self.COkP * A / d[:,None] @ np.maximum(normError, 0), self.uMin, self.uMax)
+            neighControl = np.clip(self.COkP * A / d[:, None] @ np.maximum(normError, 0), self.uMin, self.uMax)
 
             # Memory control
             self.errorSignal.append(normError)
@@ -452,7 +452,7 @@ class ComputeVanishingControl:
             A, d = self.computeActiveNeighbors(G, normError)
 
             # Cooperative (epsilon)
-            neighControl = self.beta * (np.maximum(normError, 0) - A / d[:,None] @ np.maximum(normError, 0))
+            neighControl = self.beta * (np.maximum(normError, 0) - A / d[:, None] @ np.maximum(normError, 0))
 
             # Memory control
             self.errorSignal.append(normError)
@@ -497,8 +497,8 @@ class ComputeVanishingControl:
             self.coopU.append(neighControl)
 
             # Total control law
-            totalControl = G.graph["self"] * localControl + (1 - G.graph["self"]) * np.clip(
-                neighControl, self.uMin, self.uMax
+            totalControl = np.clip(
+                G.graph["self"] * localControl - (1 - G.graph["self"]) * neighControl, self.uMin, self.uMax
             )
 
         elif self.typeCtr in ("COPD2", "COST6", "COSTN5"):
@@ -534,8 +534,8 @@ class ComputeVanishingControl:
             self.coopU.append(neighControl)
 
             # Total control law
-            totalControl = G.graph["self"] * localControl + (1 - G.graph["self"]) * np.clip(
-                neighControl, self.uMin, self.uMax
+            totalControl = np.clip(
+                G.graph["self"] * localControl - (1 - G.graph["self"]) * neighControl, self.uMin, self.uMax
             )
         else:
             pass
