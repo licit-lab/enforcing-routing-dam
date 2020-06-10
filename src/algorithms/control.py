@@ -362,21 +362,31 @@ class ComputeVanishingControl:
                 neighControl, self.uMin, self.uMax
             )
 
-        elif self.typeCtr in ("COPNL", "COST3"):
+        elif self.typeCtr in ("COPE", "COST2", "COSTN1"):
 
             # Compute error
+            errorState = np.array([G.nodes[s]["freeFlowSpeed"] - speeds[-1][s] for s in G.nodes])
+
+            # Compute error normalized
             normError = np.array(
                 [(G.nodes[s]["freeFlowSpeed"] - speeds[-1][s]) / G.nodes[s]["freeFlowSpeed"] for s in G.nodes]
             )
 
-            # Adjacency / Degree
-            A, d = self.computeActiveNeighbors(G, normError)
+            # Proportional
+            proportional = self.kP * errorState
 
-            # Local control
-            localControl = np.clip(normError, self.uMin, self.uMax)
+            # Differential
+            differential = self.kP * self.Td * self.derivator(errorState) * (errorState > -0.5)
 
-            # Cooperative (epsilon)
-            neighControl = self.beta * (np.maximum(normError, 0) - A @ np.maximum(normError, 0) / d)
+            # Local Control
+            localControl = np.clip(proportional + differential, self.uMin, self.uMax)
+
+            # Network data
+            _, L, epsilon, A, D = get_graph_data(G)  # Works because the graph is small
+            d = np.array(list(D.values()))  # Find degrees vector
+
+            # Cooperative term
+            neighControl = np.clip(self.COkP * A / d[:, None] @ np.maximum(normError, 0), self.uMin, self.uMax)
 
             # Memory control
             self.errorSignal.append(normError)
@@ -384,41 +394,78 @@ class ComputeVanishingControl:
             self.coopU.append(neighControl)
 
             # Total control law
-            totalControl = self.kP * (1 + neighControl) * localControl
+            totalControl = G.graph["self"] * localControl + (1 - G.graph["self"]) * neighControl
+
+        elif self.typeCtr in ("COPEV2", "COST3", "COSTN2"):
+
+            # Compute error
+            errorState = np.array([G.nodes[s]["freeFlowSpeed"] - speeds[-1][s] for s in G.nodes])
+
+            # Compute error normalized
+            normError = np.array(
+                [(G.nodes[s]["freeFlowSpeed"] - speeds[-1][s]) / G.nodes[s]["freeFlowSpeed"] for s in G.nodes]
+            )
+
+            # Proportional
+            proportional = self.kP * errorState
+
+            # Differential
+            differential = self.kP * self.Td * self.derivator(errorState) * (errorState > -0.5)
+
+            # Local Control
+            localControl = np.clip(proportional + differential, self.uMin, self.uMax)
+
+            # Network data
+            A, d = self.computeActiveNeighbors(G, normError)
+
+            # Cooperative term
+            neighControl = np.clip(self.COkP * A / d[:,None] @ np.maximum(normError, 0), self.uMin, self.uMax)
+
+            # Memory control
+            self.errorSignal.append(normError)
+            self.localU.append(localControl)
+            self.coopU.append(neighControl)
+
+            # Total control law
+            totalControl = G.graph["self"] * localControl + (1 - G.graph["self"]) * neighControl
+
+        elif self.typeCtr in ("COPNL", "COST3", "COSTN3"):
+
+            # Compute error
+            errorState = np.array([G.nodes[s]["freeFlowSpeed"] - speeds[-1][s] for s in G.nodes])
+
+            # Compute error normalized
+            normError = np.array(
+                [(G.nodes[s]["freeFlowSpeed"] - speeds[-1][s]) / G.nodes[s]["freeFlowSpeed"] for s in G.nodes]
+            )
+
+            # Proportional
+            proportional = self.kP * errorState
+
+            # Differential
+            differential = self.kP * self.Td * self.derivator(errorState) * (errorState > -0.5)
+
+            # Local Control
+            localControl = np.clip(proportional + differential, self.uMin, self.uMax)
+
+            # Adjacency / Degree (Variable)
+            A, d = self.computeActiveNeighbors(G, normError)
+
+            # Cooperative (epsilon)
+            neighControl = self.beta * (np.maximum(normError, 0) - A / d[:,None] @ np.maximum(normError, 0))
+
+            # Memory control
+            self.errorSignal.append(normError)
+            self.localU.append(localControl)
+            self.coopU.append(neighControl)
+
+            # Total control law
+            totalControl = (1 + neighControl) * localControl
 
             # Bounding control
             totalControl = np.clip(totalControl, self.uMin, self.uMax)
 
-        elif self.typeCtr in ("COPE", "COST2"):
-
-            # Network data
-            _, L, epsilon, A, D = get_graph_data(G)  # Works because the graph is small
-
-            # Find degrees vector
-            d = np.array(list(D.values()))
-
-            # Compute error
-            normError = np.array(
-                [(G.nodes[s]["freeFlowSpeed"] - speeds[-1][s]) / G.nodes[s]["freeFlowSpeed"] for s in G.nodes]
-            )
-
-            # Local control
-            localControl = np.clip(normError, self.uMin, self.uMax)
-
-            # Cooperative term
-            neighControl = self.kP * epsilon * A @ np.maximum(normError, 0) / d
-
-            # Memory control
-            self.errorSignal.append(normError)
-            self.localU.append(localControl)
-            self.coopU.append(neighControl)
-
-            # Total control law
-            totalControl = G.graph["self"] * localControl + (1 - G.graph["self"]) * np.clip(
-                neighControl, self.uMin, self.uMax
-            )
-
-        elif self.typeCtr in ("COPD1", "COST5"):
+        elif self.typeCtr in ("COPD1", "COST5", "COSTN4"):
 
             # Compute error
             errorState = np.array([G.nodes[s]["freeFlowSpeed"] - speeds[-1][s] for s in G.nodes])
@@ -454,7 +501,7 @@ class ComputeVanishingControl:
                 neighControl, self.uMin, self.uMax
             )
 
-        elif self.typeCtr in ("COPD2", "COST6"):
+        elif self.typeCtr in ("COPD2", "COST6", "COSTN5"):
 
             # Compute error
             errorState = np.array([G.nodes[s]["freeFlowSpeed"] - speeds[-1][s] for s in G.nodes])
@@ -550,10 +597,10 @@ class ComputeVanishingControl:
         APerm = A @ permMatrix
 
         # New degree
-        DPerm = np.sum(APerm, axis=1).reshape(self.N, 1)
+        DPerm = np.sum(APerm, axis=1).reshape(self.N,)
 
         # Feasibility operation
         # A @ err instead of A @ error / d
-        DPerm[DPerm == 0] = 1
+        DPerm = np.maximum(DPerm, 1)
 
         return APerm, DPerm
