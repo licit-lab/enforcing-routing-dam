@@ -604,20 +604,3 @@ class ComputeVanishingControl:
         DPerm = np.maximum(DPerm, 1)
 
         return APerm, DPerm
-
- %%time
-
- import numpy as np
- import pandas as pd
- from itertools import product
-
- Id_Zone_PU = list('abecedario')
- cum = np.empty([2,5])
- for i in Id_Zone_PU:
-     print(i)
-     for j in Id_Zone_PU:
-         temp = [np.array([[0,i,j,h,d],[0,j,i,h,d]]) for h,d in product(range(1,32),range(1,24))]
-         temp = np.vstack(temp)
-         cum = np.vstack([cum,temp])
- cum = cum[2:]
- P = pd.DataFrame(cum)

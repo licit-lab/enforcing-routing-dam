@@ -79,7 +79,7 @@ case="P"
 #     -p DEMAND_FILE "demand_scenario_C.csv" &
 # done
 
-distance=400
+distance=800
 
 for k in 0.01 0.05 0.1 0.15 0.17 0.19 0.2 0.21 0.23 0.25 0.3 0.4 0.45 0.5 0.55 0.6 0.65 0.7 0.8
 do
@@ -102,7 +102,7 @@ do
     -p DEMAND_FILE "demand_scenario_F.csv" &
 done
 
-distance=600
+distance=1200
 
 for k in 0.01 0.05 0.1 0.15 0.17 0.19 0.2 0.21 0.23 0.25 0.3 0.4 0.45 0.5 0.55 0.6 0.65 0.7 0.8
 do
