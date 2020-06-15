@@ -7,7 +7,7 @@ IT=0
 
 # Scenario A
 
-for case in COSTN1 COSTN2 COSTN3 COSTN4 COSTN5
+for case in COSTN1 COSTN6
 do
     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_5x5_cost_SCNAD800K05TD200.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
@@ -38,7 +38,7 @@ done
 
 # Scenario B
 
-for case in COSTN1 COSTN2 COSTN3 COSTN4 COSTN5
+for case in COSTN1 COSTN6
 do
     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_5x5_cost_SCNBD800K05TD200.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
