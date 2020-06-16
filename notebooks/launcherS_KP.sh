@@ -79,9 +79,9 @@ case="P"
 #     -p DEMAND_FILE "demand_scenario_C.csv" &
 # done
 
-distance=400
+distance=1200
 
-for k in 0.17 0.55
+for k in 0.25 0.5
 do
     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${k}_SCNFD${distance}.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
@@ -102,9 +102,9 @@ do
     -p DEMAND_FILE "demand_scenario_F.csv" &
 done
 
-distance=600
+distance=1600
 
-for k in 0.45 0.7
+for k in 0.1 0.15 0.2 0.25 0.3 0.4 0.45 0.5 0.6 0.7 0.8
 do
     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${k}_SCNFD${distance}.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
