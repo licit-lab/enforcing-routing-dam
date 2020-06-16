@@ -76,7 +76,7 @@ do
     -p KP ${k} \
     -p DISTANCE_CONTROL ${distance} \
     -p FILE "manhattan_grid_5X5_scenario_B.xml" \
-    -p DEMAND_FILE "demand_scenario_B.csv" &  
+    -p DEMAND_FILE "demand_scenario_B.csv" &
 done
 
 distance=1600
@@ -99,7 +99,7 @@ do
     -p KP ${k} \
     -p DISTANCE_CONTROL ${distance} \
     -p FILE "manhattan_grid_5X5_scenario_B.xml" \
-    -p DEMAND_FILE "demand_scenario_B.csv" &   
+    -p DEMAND_FILE "demand_scenario_B.csv" &
 done
 
 # Scenario C
