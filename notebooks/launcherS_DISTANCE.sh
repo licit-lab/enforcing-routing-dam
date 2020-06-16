@@ -10,7 +10,7 @@ IT=0
 case="P"
 kp=0.9
 
-for d in 50 200 400 600 800 1200 1600
+for d in 400 600 800 1200 1600
 do
     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${kp}_SCNAD${d}.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
@@ -33,7 +33,7 @@ done
 
 # Scenario B
 
-for d in 50 200 400 600 800 1200 1600
+for d in 400 600 800 1200 1600
 do
     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${kp}_SCNBD${d}.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
@@ -56,7 +56,7 @@ done
 
 # Scenario C
 
-for d in 50 200 400 600 800 1200 1600
+for d in 400 600 800 1200 1600
 do
     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${kp}_SCNCD${d}.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
