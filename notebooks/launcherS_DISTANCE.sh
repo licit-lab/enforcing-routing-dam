@@ -27,7 +27,7 @@ do
     -p CTR_ALG ${case} \
     -p KP ${kp} \
     -p DISTANCE_CONTROL ${d} \
-    -p FILE "manhattan_grid_5X5_A.xml" \
+    -p FILE "manhattan_grid_5X5_scenario_A.xml" \
     -p DEMAND_FILE "demand_scenario_A.csv" &   
 done
 
@@ -50,7 +50,7 @@ do
     -p CTR_ALG ${case} \
     -p KP ${kp} \
     -p DISTANCE_CONTROL ${d} \
-    -p FILE "manhattan_grid_5X5_B.xml" \
+    -p FILE "manhattan_grid_5X5_scenario_B.xml" \
     -p DEMAND_FILE "demand_scenario_B.csv" &  
 done
 
@@ -73,7 +73,7 @@ do
     -p CTR_ALG ${case} \
     -p KP ${kp} \
     -p DISTANCE_CONTROL ${d} \
-    -p FILE "manhattan_grid_5X5_C.xml" \
+    -p FILE "manhattan_grid_5X5_scenario_C.xml" \
     -p DEMAND_FILE "demand_scenario_C.csv" &  
 done
 
