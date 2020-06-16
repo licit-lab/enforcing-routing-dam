@@ -8,73 +8,97 @@ IT=0
 # Scenario A
 
 case="P"
-kp=0.9
+kp=0.4
 
-for d in 400 600 800 1200 1600
-do
-    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${kp}_SCNAD${d}.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT SKP_SCNAD${d}_${kp} \
-    -p CTR_ALG ${case} \
-    -p KP ${kp} \
-    -p DISTANCE_CONTROL ${d} \
-    -p FILE "manhattan_grid_5X5_scenario_A.xml" \
-    -p DEMAND_FILE "demand_scenario_A.csv" &"
-    IT=$((IT+1))
-    papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${kp}_SCNAD${d}.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT SKP_SCNAD${d}_${kp} \
-    -p CTR_ALG ${case} \
-    -p KP ${kp} \
-    -p DISTANCE_CONTROL ${d} \
-    -p FILE "manhattan_grid_5X5_scenario_A.xml" \
-    -p DEMAND_FILE "demand_scenario_A.csv" &   
-done
+# for d in 400 600 800 1200 1600
+# do
+#     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${kp}_SCNAD${d}.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p EXPERIMENT SKP_SCNAD${d}_${kp} \
+#     -p CTR_ALG ${case} \
+#     -p KP ${kp} \
+#     -p DISTANCE_CONTROL ${d} \
+#     -p FILE "manhattan_grid_5X5_scenario_A.xml" \
+#     -p DEMAND_FILE "demand_scenario_A.csv" &"
+#     IT=$((IT+1))
+#     papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${kp}_SCNAD${d}.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p EXPERIMENT SKP_SCNAD${d}_${kp} \
+#     -p CTR_ALG ${case} \
+#     -p KP ${kp} \
+#     -p DISTANCE_CONTROL ${d} \
+#     -p FILE "manhattan_grid_5X5_scenario_A.xml" \
+#     -p DEMAND_FILE "demand_scenario_A.csv" &   
+# done
 
 # Scenario B
 
-for d in 400 600 800 1200 1600
-do
-    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${kp}_SCNBD${d}.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT SKP_SCNBD${d}_${kp} \
-    -p CTR_ALG ${case} \
-    -p KP ${kp} \
-    -p DISTANCE_CONTROL ${d} \
-    -p FILE "manhattan_grid_5X5_scenario_B.xml" \
-    -p DEMAND_FILE "demand_scenario_B.csv" &"
-    IT=$((IT+1))
-    papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${kp}_SCNBD${d}.ipynb \
-    -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT SKP_SCNBD${d}_${kp} \
-    -p CTR_ALG ${case} \
-    -p KP ${kp} \
-    -p DISTANCE_CONTROL ${d} \
-    -p FILE "manhattan_grid_5X5_scenario_B.xml" \
-    -p DEMAND_FILE "demand_scenario_B.csv" &  
-done
+# for d in 400 600 800 1200 1600
+# do
+#     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${kp}_SCNBD${d}.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p EXPERIMENT SKP_SCNBD${d}_${kp} \
+#     -p CTR_ALG ${case} \
+#     -p KP ${kp} \
+#     -p DISTANCE_CONTROL ${d} \
+#     -p FILE "manhattan_grid_5X5_scenario_B.xml" \
+#     -p DEMAND_FILE "demand_scenario_B.csv" &"
+#     IT=$((IT+1))
+#     papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${kp}_SCNBD${d}.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p EXPERIMENT SKP_SCNBD${d}_${kp} \
+#     -p CTR_ALG ${case} \
+#     -p KP ${kp} \
+#     -p DISTANCE_CONTROL ${d} \
+#     -p FILE "manhattan_grid_5X5_scenario_B.xml" \
+#     -p DEMAND_FILE "demand_scenario_B.csv" &  
+# done
 
 # Scenario C
 
+# for d in 400 600 800 1200 1600
+# do
+#     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${kp}_SCNCD${d}.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p EXPERIMENT SKP_SCNCD${d}_${kp} \
+#     -p CTR_ALG ${case} \
+#     -p KP ${kp} \
+#     -p DISTANCE_CONTROL ${d} \
+#     -p FILE "manhattan_grid_5X5_scenario_C.xml" \
+#     -p DEMAND_FILE "demand_scenario_C.csv" &"
+#     IT=$((IT+1))
+#     papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${kp}_SCNCD${d}.ipynb \
+#     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
+#     -p EXPERIMENT SKP_SCNCD${d}_${kp} \
+#     -p CTR_ALG ${case} \
+#     -p KP ${kp} \
+#     -p DISTANCE_CONTROL ${d} \
+#     -p FILE "manhattan_grid_5X5_scenario_C.xml" \
+#     -p DEMAND_FILE "demand_scenario_C.csv" &  
+# done
+
+# Scenario G
+
 for d in 400 600 800 1200 1600
 do
-    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${kp}_SCNCD${d}.ipynb \
+    echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${kp}_SCNGD${d}.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT SKP_SCNCD${d}_${kp} \
+    -p EXPERIMENT SKP_SCNGD${d}_${kp} \
     -p CTR_ALG ${case} \
     -p KP ${kp} \
     -p DISTANCE_CONTROL ${d} \
-    -p FILE "manhattan_grid_5X5_scenario_C.xml" \
-    -p DEMAND_FILE "demand_scenario_C.csv" &"
+    -p FILE "manhattan_grid_5X5_scenario_G.xml" \
+    -p DEMAND_FILE "demand_scenario_G.csv" &"
     IT=$((IT+1))
-    papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${kp}_SCNCD${d}.ipynb \
+    papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${kp}_SCNGD${d}.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT SKP_SCNCD${d}_${kp} \
+    -p EXPERIMENT SKP_SCNGD${d}_${kp} \
     -p CTR_ALG ${case} \
     -p KP ${kp} \
     -p DISTANCE_CONTROL ${d} \
-    -p FILE "manhattan_grid_5X5_scenario_C.xml" \
-    -p DEMAND_FILE "demand_scenario_C.csv" &  
+    -p FILE "manhattan_grid_5X5_scenario_G.xml" \
+    -p DEMAND_FILE "demand_scenario_G.csv" &  
 done
+
 
 echo "Total Simulations: ${IT}"
