@@ -88,7 +88,7 @@ done
 
 # Reference cases 3 P: 0.6 /1200
 case="P"
-kp=0.6
+kp=0.7
 distance=1200
 
 # Scenario A
