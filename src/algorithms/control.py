@@ -557,7 +557,8 @@ class ComputeVanishingControl:
             _, L, epsilon, A, D = get_graph_data(G)  # Works because the graph is small
             d = np.array(list(D.values()))
 
-            meanError = (A + np.eye(*A.shape))/(d[:,None]+1) @ errorState
+            meanError = (A + np.eye(*A.shape)) / (d[:, None] + 1) @ errorState
+            meanError = np.squeeze(np.asarray(meanError))
 
             # Compute neighbor information
             proportionalCO = self.COkP * meanError
