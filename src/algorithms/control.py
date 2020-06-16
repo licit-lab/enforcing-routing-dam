@@ -387,6 +387,7 @@ class ComputeVanishingControl:
 
             # Cooperative term
             neighControl = np.clip(self.COkP * A / d @ np.maximum(normError, 0), self.uMin, self.uMax)
+            neighControl = np.squeeze(np.asarray(neighControl))
 
             # Memory control
             self.errorSignal.append(normError)
