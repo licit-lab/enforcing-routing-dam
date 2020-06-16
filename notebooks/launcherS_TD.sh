@@ -93,11 +93,11 @@ distance=1200
 
 # Scenario A
 
-papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${k}_SCNAD${distance}.ipynb \
+papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${kp}_SCNAD${distance}.ipynb \
 -p PATH_SYMUVIA ${PATH_SYMUVIA} \
--p EXPERIMENT SKP_SCNAD${distance}_${k} \
+-p EXPERIMENT SKP_SCNAD${distance}_${kp} \
 -p CTR_ALG ${case} \
--p KP ${k} \
+-p KP ${kp} \
 -p DISTANCE_CONTROL ${distance} \
 -p FILE "manhattan_grid_5X5_scenario_A.xml" \
 -p DEMAND_FILE "demand_scenario_A.csv" &
@@ -105,11 +105,11 @@ IT=$((IT+1))
 
 # Scenario B
 
-papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${k}_SCNBD${distance}.ipynb \
+papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${kp}_SCNBD${distance}.ipynb \
 -p PATH_SYMUVIA ${PATH_SYMUVIA} \
--p EXPERIMENT SKP_SCNBD${distance}_${k} \
+-p EXPERIMENT SKP_SCNBD${distance}_${kp} \
 -p CTR_ALG ${case} \
--p KP ${k} \
+-p KP ${kp} \
 -p DISTANCE_CONTROL ${distance} \
 -p FILE "manhattan_grid_5X5_scenario_B.xml" \
 -p DEMAND_FILE "demand_scenario_B.csv" &
@@ -117,11 +117,11 @@ IT=$((IT+1))
 
 # Scenario C
 
-papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${k}_SCNCD${distance}.ipynb \
+papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${kp}_SCNCD${distance}.ipynb \
 -p PATH_SYMUVIA ${PATH_SYMUVIA} \
--p EXPERIMENT SKP_SCNCD${distance}_${k} \
+-p EXPERIMENT SKP_SCNCD${distance}_${kp} \
 -p CTR_ALG ${case} \
--p KP ${k} \
+-p KP ${kp} \
 -p DISTANCE_CONTROL ${distance} \
 -p FILE "manhattan_grid_5X5_scenario_C.xml" \
 -p DEMAND_FILE "demand_scenario_C.csv" &
