@@ -79,7 +79,7 @@ kp=0.9
 
 # Scenario F 
 
-for d in 400 600 800 1200 1600
+for d in 1600
 do
     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_KP_${kp}_SCNFD${d}.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
