@@ -3,11 +3,11 @@
 PATH_SYMUVIA="/home/ladino/dev-symuvia/build/lib/libSymuVia.so"
 IT=0
 
-# Sensitivity Alpha - Cooperative 4: 
+# Sensitivity Alpha - Cooperative 6: 
 
 # Scenario A
 
-case="COSTN4"
+case="COSTN6"
 
 kp=0.65
 td=0.0
