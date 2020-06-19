@@ -577,6 +577,42 @@ class ComputeVanishingControl:
             totalControl = np.clip(
                 G.graph["self"] * localControl - (1 - G.graph["self"]) * neighControl, self.uMin, self.uMax
             )
+        elif self.typeCtr in ("COPD1MOD", "COSTN7"):
+            # Changing scaling factors (Alpha does not exist anymore)
+
+            # Compute error
+            errorState = np.array([G.nodes[s]["freeFlowSpeed"] - speeds[-1][s] for s in G.nodes])
+
+            # Normalized states
+            normState = np.array([speeds[-1][s] / G.nodes[s]["freeFlowSpeed"] for s in G.nodes])
+
+            # Proportional
+            proportional = self.kP * errorState
+
+            # Differential
+            differential = self.kP * self.Td * self.derivator(errorState) * (errorState > -0.5)
+
+            # Local Control
+            localControl = proportional + differential
+
+            # Network data
+            _, L, epsilon, _, _ = get_graph_data(G)  # Works because the graph is small
+
+            # Compute neighbor information
+            proportionalCO = self.COkP * L @ normState
+
+            # Cooperative term
+            neighControl = proportionalCO
+
+            # Memory control
+            self.errorSignal.append(errorState)
+            self.localU.append(localControl)
+            self.coopU.append(neighControl)
+
+            # Total control law
+            totalControl = np.clip(
+                 localControl - neighControl, self.uMin, self.uMax
+            )
         else:
             pass
 
