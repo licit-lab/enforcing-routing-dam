@@ -75,7 +75,7 @@ do
     -p CO_KP ${kp} \
     -p TD ${td} \
     -p CO_TD ${td} \
-    -p BETA ${k} \    
+    -p BETA ${k} \
     -p DISTANCE_CONTROL ${distance} \
     -p FILE "manhattan_grid_5X5_scenario_B.xml" \
     -p DEMAND_FILE "demand_scenario_B.csv" &    
