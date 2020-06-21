@@ -36,7 +36,7 @@ do
     -p ZONES "9zones/"
     -p FILE "manhattan_grid_3X3_scenario_B.xml" \
     -p DEMAND_FILE "demand_scenario_B.csv" \
-    -p REF_SPEED "ref_speeds_3X3.csv" &    
+    -p REF_SPEED "ref_speeds_3X3.csv" &
 done
 done
 
