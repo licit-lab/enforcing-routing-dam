@@ -22,7 +22,9 @@ do
     -p KP ${k} \
     -p TD ${td} \
     -p DISTANCE_CONTROL ${d} \
-    -p ZONES "9zones/"
+    -p ZONES "9zones/" \
+    -p NRow 3 \
+    -p NCol 3 \
     -p FILE "manhattan_grid_3X3_scenario_B.xml" \
     -p DEMAND_FILE "demand_scenario_B.csv" \
     -p REF_SPEED "ref_speeds_3X3.csv" &"
@@ -35,6 +37,8 @@ do
     -p TD ${td} \
     -p DISTANCE_CONTROL ${d} \
     -p ZONES "9zones/" \
+    -p NRow 3 \
+    -p NCol 3 \
     -p FILE "manhattan_grid_3X3_scenario_B.xml" \
     -p DEMAND_FILE "demand_scenario_B.csv" \
     -p REF_SPEED "ref_speeds_3X3.csv" &
