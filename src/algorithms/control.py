@@ -203,7 +203,7 @@ class ComputeVanishingControl:
         self.Ti = dctPar.get("TI", 1200)
         self.Td = dctPar.get("TD", 300)
         self.Twd = dctPar.get("TWD", 360)
-        self.COkP = dctPar.get("COP", 0.15)
+        self.COkP = dctPar.get("COKP", 0.15)
         self.COTi = dctPar.get("COTI", 1200)
         self.COTd = dctPar.get("COTD", 300)
         self.COTwd = dctPar.get("COTWD", 360)
