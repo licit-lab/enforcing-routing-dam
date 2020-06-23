@@ -45,9 +45,9 @@ import glob
 import os
 import pandas as pd
 from operator import itemgetter
-from indicators import TTT_var, Mean_speed, MS_var, prc_rerouted, Dup, mean_routing, TWinLoose
+from .indicators import TTT_var, Mean_speed, MS_var, prc_rerouted, Dup, mean_routing, TWinLoose
 
-from loadSensorData import retreiveMFDData, retrieveVehData, retriveControlData, retriveReroutingData
+from .dataloader import retreiveMFDData, retrieveVehData, retriveControlData, retriveReroutingData
 
 
 def locate_filenames(general_path):
