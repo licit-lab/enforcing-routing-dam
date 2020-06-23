@@ -113,6 +113,21 @@ def TWinLoose(XMLDataFrame, XMLDataFrameRef):
     Tloose5 = np.percentile(Tloose, 95)
     PrcTSN = (TTT - TTTNC).divide(TTTNC) * 100
     PrcTwin = PrcTSN[PrcTSN > 0]
-    PrcTloose = -PrcTSN[PrcTSN > 0]
+    PrcTloose = -PrcTSN[PrcTSN < 0]
 
-    return Twin.mean(), Tloose.mean(), Tloose10, Tloose5, PrcTwin.mean(), PrcTloose.mean()
+    return (
+        Twin.mean(),
+        Tloose.mean(),
+        Tloose10,
+        Tloose5,
+        PrcTwin.mean(),
+        PrcTloose.mean(),
+    )
+
+
+def networkHomogeneity(XMLDataFrame):
+    """
+        Variance of average speeds in zones
+    """
+    SPD = compute_SPD(XMLDataFrame)
+    return SPD.mean().drop(["sensor_network", "sensor_outer_ring"]).std()
