@@ -13,7 +13,7 @@ alpha=0.5
 
 for i in manhattan_grid_3X3_scenario_A.xml,9zones/,ref_speeds_3X3.csv,3X3,3 \
 manhattan_grid_7X7_scenario_A.xml,49zones/,ref_speeds_7X7.csv,7X7,7 \
-manhattan_grid_11X11_scenario_A,121zones/,ref_speeds_11X11.csv,11X11,11
+manhattan_grid_11X11_scenario_A.xml,121zones/,ref_speeds_11X11.csv,11X11,11
 do IFS=","
     set -- $i
     echo "Running: $1 and $2 and $3"
@@ -57,7 +57,7 @@ alpha=0.2
 
 for i in manhattan_grid_3X3_scenario_A.xml,9zones/,ref_speeds_3X3.csv,3X3,3 \
 manhattan_grid_7X7_scenario_A.xml,49zones/,ref_speeds_7X7.csv,7X7,7 \
-manhattan_grid_11X11_scenario_A,121zones/,ref_speeds_11X11.csv,11X11,11
+manhattan_grid_11X11_scenario_A.xml,121zones/,ref_speeds_11X11.csv,11X11,11
 do IFS=","
     set -- $i
     echo "Running: $1 and $2 and $3"
@@ -102,7 +102,7 @@ alpha=0.5
 
 for i in manhattan_grid_3X3_scenario_A.xml,9zones/,ref_speeds_3X3.csv,3X3,3 \
 manhattan_grid_7X7_scenario_A.xml,49zones/,ref_speeds_7X7.csv,7X7,7 \
-manhattan_grid_11X11_scenario_A,121zones/,ref_speeds_11X11.csv,11X11,11
+manhattan_grid_11X11_scenario_A.xml,121zones/,ref_speeds_11X11.csv,11X11,11
 do IFS=","
     set -- $i
     echo "Running: $1 and $2 and $3"
@@ -152,7 +152,7 @@ alpha=0.2
 
 for i in manhattan_grid_3X3_scenario_B.xml,9zones/,ref_speeds_3X3.csv,3X3,3 \
 manhattan_grid_7X7_scenario_B.xml,49zones/,ref_speeds_7X7.csv,7X7,7 \
-manhattan_grid_11X11_scenario_B,121zones/,ref_speeds_11X11.csv,11X11,11
+manhattan_grid_11X11_scenario_B.xml,121zones/,ref_speeds_11X11.csv,11X11,11
 do IFS=","
     set -- $i
     echo "Running: $1 and $2 and $3"
@@ -197,7 +197,7 @@ alpha=0.4
 
 for i in manhattan_grid_3X3_scenario_B.xml,9zones/,ref_speeds_3X3.csv,3X3,3 \
 manhattan_grid_7X7_scenario_B.xml,49zones/,ref_speeds_7X7.csv,7X7,7 \
-manhattan_grid_11X11_scenario_B,121zones/,ref_speeds_11X11.csv,11X11,11
+manhattan_grid_11X11_scenario_B.xml,121zones/,ref_speeds_11X11.csv,11X11,11
 do IFS=","
     set -- $i
     echo "Running: $1 and $2 and $3"
