@@ -26,7 +26,7 @@ do
     -p DISTANCE_CONTROL ${distance} \
     -p FILE "manhattan_grid_5X5_scenario_A.xml" \
     -p DEMAND_FILE "demand_scenario_A.csv" &"
-    IT=$((IT+1))    
+    IT=$((IT+1))
     papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_COKP_${k}_SCNAD${distance}K${kp}.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
     -p EXPERIMENT manhattan_A_V2_3_${distance}_5X5_${case}_${kp}_${td}_X_${k}_X_X \
