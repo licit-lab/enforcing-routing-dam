@@ -184,8 +184,9 @@ class ComputeVanishingControl:
         A class to compute control law
     """
 
-    def __init__(self, G: nx.Graph, samplingTime: float = TS, dctPar: dict = {}) -> None:
+    def __init__(self, G: nx.Graph, samplingTime: float = TS, dctPar: dict = {}, dfSpd: dict = {}) -> None:
         self.N = len(G.nodes)
+        self.refSpeed = dfSpd
 
         # States
         self.integrator = Integrator(self.N, samplingTime)
@@ -208,6 +209,9 @@ class ComputeVanishingControl:
         self.COTd = dctPar.get("COTD", 300)
         self.COTwd = dctPar.get("COTWD", 360)
         self.beta = dctPar.get("BETA", 0.3)
+
+        # Trigger
+        self.trigger = dctPar.get("TRIGGER", -1)
 
         # Memory
         self.uKI = []
@@ -243,7 +247,7 @@ class ComputeVanishingControl:
         if self.typeCtr == "P":
 
             # Compute error
-            errorState = np.array([G.nodes[s]["freeFlowSpeed"] - speeds[-1][s] for s in G.nodes])
+            errorState = np.array([self.refSpeed[s] - speeds[-1][s] for s in G.nodes])
 
             # Control
             control = self.kP * errorState
@@ -259,7 +263,7 @@ class ComputeVanishingControl:
         elif self.typeCtr == "PI":
 
             # Compute error
-            errorState = np.array([G.nodes[s]["freeFlowSpeed"] - speeds[-1][s] for s in G.nodes])
+            errorState = np.array([self.refSpeed[s] - speeds[-1][s] for s in G.nodes])
 
             # Proportional
             proportional = self.kP * errorState
@@ -284,7 +288,7 @@ class ComputeVanishingControl:
 
         elif self.typeCtr == "PD":
 
-            errorState = np.array([G.nodes[s]["freeFlowSpeed"] - speeds[-1][s] for s in G.nodes])
+            errorState = np.array([self.refSpeed[s] - speeds[-1][s] for s in G.nodes])
 
             # Proportional
             proportional = self.kP * errorState
@@ -309,7 +313,7 @@ class ComputeVanishingControl:
             _, L, epsilon, _, _ = get_graph_data(G)  # Works because the graph is small
 
             # Normalized states
-            normState = np.array([speeds[-1][s] / G.nodes[s]["freeFlowSpeed"] for s in G.nodes])
+            normState = np.array([speeds[-1][s] / self.refSpeed[s] for s in G.nodes])
 
             # Compute local control
             localControl = np.clip(1 - normState, self.uMin, self.uMax)
@@ -336,7 +340,7 @@ class ComputeVanishingControl:
             _, L, epsilon, _, _ = get_graph_data(G)  # Works because the graph is small
 
             # Normalized states
-            normState = np.array([speeds[-1][s] / G.nodes[s]["freeFlowSpeed"] for s in G.nodes])
+            normState = np.array([speeds[-1][s] / self.refSpeed[s] for s in G.nodes])
 
             # Compute local control
             localControl = np.clip(1 - normState, self.uMin, self.uMax)
@@ -365,12 +369,10 @@ class ComputeVanishingControl:
         elif self.typeCtr in ("COPE", "COST2", "COSTN1"):
 
             # Compute error
-            errorState = np.array([G.nodes[s]["freeFlowSpeed"] - speeds[-1][s] for s in G.nodes])
+            errorState = np.array([self.refSpeed[s] - speeds[-1][s] for s in G.nodes])
 
             # Compute error normalized
-            normError = np.array(
-                [(G.nodes[s]["freeFlowSpeed"] - speeds[-1][s]) / G.nodes[s]["freeFlowSpeed"] for s in G.nodes]
-            )
+            normError = np.array([(self.refSpeed[s] - speeds[-1][s]) / self.refSpeed[s] for s in G.nodes])
 
             # Proportional
             proportional = self.kP * errorState
@@ -400,12 +402,10 @@ class ComputeVanishingControl:
         elif self.typeCtr in ("COPEV2", "COST3", "COSTN2"):
 
             # Compute error
-            errorState = np.array([G.nodes[s]["freeFlowSpeed"] - speeds[-1][s] for s in G.nodes])
+            errorState = np.array([self.refSpeed[s] - speeds[-1][s] for s in G.nodes])
 
             # Compute error normalized
-            normError = np.array(
-                [(G.nodes[s]["freeFlowSpeed"] - speeds[-1][s]) / G.nodes[s]["freeFlowSpeed"] for s in G.nodes]
-            )
+            normError = np.array([(self.refSpeed[s] - speeds[-1][s]) / self.refSpeed[s] for s in G.nodes])
 
             # Proportional
             proportional = self.kP * errorState
@@ -433,12 +433,10 @@ class ComputeVanishingControl:
         elif self.typeCtr in ("COPNL", "COST3", "COSTN3"):
 
             # Compute error
-            errorState = np.array([G.nodes[s]["freeFlowSpeed"] - speeds[-1][s] for s in G.nodes])
+            errorState = np.array([self.refSpeed[s] - speeds[-1][s] for s in G.nodes])
 
             # Compute error normalized
-            normError = np.array(
-                [(G.nodes[s]["freeFlowSpeed"] - speeds[-1][s]) / G.nodes[s]["freeFlowSpeed"] for s in G.nodes]
-            )
+            normError = np.array([(self.refSpeed[s] - speeds[-1][s]) / self.refSpeed[s] for s in G.nodes])
 
             # Proportional
             proportional = self.kP * errorState
@@ -469,10 +467,10 @@ class ComputeVanishingControl:
         elif self.typeCtr in ("COPD1", "COST5", "COSTN4"):
 
             # Compute error
-            errorState = np.array([G.nodes[s]["freeFlowSpeed"] - speeds[-1][s] for s in G.nodes])
+            errorState = np.array([self.refSpeed[s] - speeds[-1][s] for s in G.nodes])
 
             # Normalized states
-            normState = np.array([speeds[-1][s] / G.nodes[s]["freeFlowSpeed"] for s in G.nodes])
+            normState = np.array([speeds[-1][s] / self.refSpeed[s] for s in G.nodes])
 
             # Proportional
             proportional = self.kP * errorState
@@ -505,10 +503,10 @@ class ComputeVanishingControl:
         elif self.typeCtr in ("COPD2", "COST6", "COSTN5"):
 
             # Compute error
-            errorState = np.array([G.nodes[s]["freeFlowSpeed"] - speeds[-1][s] for s in G.nodes])
+            errorState = np.array([self.refSpeed[s] - speeds[-1][s] for s in G.nodes])
 
             # Normalized states
-            normState = np.array([speeds[-1][s] / G.nodes[s]["freeFlowSpeed"] for s in G.nodes])
+            normState = np.array([speeds[-1][s] / self.refSpeed[s] for s in G.nodes])
 
             # Proportional
             proportional = self.kP * errorState
@@ -540,10 +538,10 @@ class ComputeVanishingControl:
             )
         elif self.typeCtr in ("COPDA", "COSTN6"):
             # Compute error
-            errorState = np.array([G.nodes[s]["freeFlowSpeed"] - speeds[-1][s] for s in G.nodes])
+            errorState = np.array([self.refSpeed[s] - speeds[-1][s] for s in G.nodes])
 
             # Normalized states
-            normState = np.array([speeds[-1][s] / G.nodes[s]["freeFlowSpeed"] for s in G.nodes])
+            normState = np.array([speeds[-1][s] / self.refSpeed[s] for s in G.nodes])
 
             # Proportional
             proportional = self.kP * errorState
@@ -581,10 +579,10 @@ class ComputeVanishingControl:
             # Changing scaling factors (Alpha does not exist anymore)
 
             # Compute error
-            errorState = np.array([G.nodes[s]["freeFlowSpeed"] - speeds[-1][s] for s in G.nodes])
+            errorState = np.array([self.refSpeed[s] - speeds[-1][s] for s in G.nodes])
 
             # Normalized states
-            normState = np.array([speeds[-1][s] / G.nodes[s]["freeFlowSpeed"] for s in G.nodes])
+            normState = np.array([speeds[-1][s] / self.refSpeed[s] for s in G.nodes])
 
             # Proportional
             proportional = self.kP * errorState
@@ -610,9 +608,90 @@ class ComputeVanishingControl:
             self.coopU.append(neighControl)
 
             # Total control law
-            totalControl = np.clip(
-                 localControl - neighControl, self.uMin, self.uMax
-            )
+            totalControl = np.clip(localControl - neighControl, self.uMin, self.uMax)
+        elif self.typeCtr in ("COSTH4",):
+
+            # Compute error
+            errorState = np.array([self.refSpeed[s] - speeds[-1][s] for s in G.nodes])
+
+            # Normalized states
+            normState = np.array([speeds[-1][s] / self.refSpeed[s] for s in G.nodes])
+
+            # Proportional
+            proportional = self.kP * errorState
+
+            # Differential
+            differential = self.kP * self.Td * self.derivator(errorState) * (errorState > -0.5)
+
+            # Local Control
+            localControl = proportional + differential
+
+            # Network data
+            _, L, epsilon, _, _ = get_graph_data(G)  # Works because the graph is small
+
+            # Compute neighbor information
+            proportionalCO = self.COkP * L @ normState
+
+            # Cooperative term
+            neighControl = proportionalCO
+
+            # Memory control
+            self.errorSignal.append(errorState)
+            self.localU.append(localControl)
+            self.coopU.append(neighControl)
+
+            if simulationstep >= self.trigger:
+                # In congestion (Time trigged only local control)
+                totalControl = np.clip(localControl, self.uMin, self.uMax)
+            else:
+                # Total control law
+                totalControl = np.clip(
+                    G.graph["self"] * localControl - (1 - G.graph["self"]) * neighControl, self.uMin, self.uMax
+                )
+
+        elif self.typeCtr in ("COSTH6",):
+            # Compute error
+            errorState = np.array([self.refSpeed[s] - speeds[-1][s] for s in G.nodes])
+
+            # Normalized states
+            normState = np.array([speeds[-1][s] / self.refSpeed[s] for s in G.nodes])
+
+            # Proportional
+            proportional = self.kP * errorState
+
+            # Differential
+            differential = self.kP * self.Td * self.derivator(errorState) * (errorState > -0.5)
+
+            # Local Control
+            localControl = proportional + differential
+
+            # Network data
+            _, L, epsilon, A, D = get_graph_data(G)  # Works because the graph is small
+            d = np.array(list(D.values()))
+
+            meanError = (A + np.eye(*A.shape)) / (d[:, None] + 1) @ errorState
+            meanError = np.squeeze(np.asarray(meanError))
+
+            # Compute neighbor information
+            proportionalCO = self.COkP * meanError
+            differentialCO = self.COkP * self.COTd * self.derivatorCO(meanError)
+
+            # Cooperative term
+            neighControl = proportionalCO + differentialCO
+
+            # Memory control
+            self.errorSignal.append(errorState)
+            self.localU.append(localControl)
+            self.coopU.append(neighControl)
+
+            if simulationstep >= self.trigger:
+                # In congestion (Time trigged only local control)
+                totalControl = np.clip(localControl, self.uMin, self.uMax)
+            else:
+                # Total control law
+                totalControl = np.clip(
+                    G.graph["self"] * localControl - (1 - G.graph["self"]) * neighControl, self.uMin, self.uMax
+                )
         else:
             pass
 
