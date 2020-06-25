@@ -24,7 +24,7 @@ echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${alpha}_SCN
 -p CO_TD ${td} \
 -p DISTANCE_CONTROL ${distance} \
 -p FILE "manhattan_grid_5X5_scenario_A.xml" \
--p DEMAND_FILE "demand_scenario_A.csv" 
+-p DEMAND_FILE "demand_scenario_A.csv" \
 -p REF_SPEED "ref_speeds_25zones.csv" &"
 IT=$((IT+1))
 papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${alpha}_SCNAD${distance}K${kp}.ipynb \
@@ -38,8 +38,8 @@ papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${alpha}_SCNAD${di
 -p CO_TD ${td} \
 -p DISTANCE_CONTROL ${distance} \
 -p FILE "manhattan_grid_5X5_scenario_A.xml" \
--p DEMAND_FILE "demand_scenario_A.csv"
--p REF_SPEED "ref_speeds_25zones.csv"  &
+-p DEMAND_FILE "demand_scenario_A.csv" \
+-p REF_SPEED "ref_speeds_25zones.csv" &
 
 case="COSTN4"
 alpha=0.2
@@ -55,7 +55,7 @@ echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${alpha}_SCN
 -p CO_TD ${td} \
 -p DISTANCE_CONTROL ${distance} \
 -p FILE "manhattan_grid_5X5_scenario_A.xml" \
--p DEMAND_FILE "demand_scenario_A.csv" 
+-p DEMAND_FILE "demand_scenario_A.csv" \
 -p REF_SPEED "ref_speeds_25zones.csv" &"
 IT=$((IT+1))
 papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${alpha}_SCNAD${distance}K${kp}.ipynb \
@@ -69,8 +69,8 @@ papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${alpha}_SCNAD${di
 -p CO_TD ${td} \
 -p DISTANCE_CONTROL ${distance} \
 -p FILE "manhattan_grid_5X5_scenario_A.xml" \
--p DEMAND_FILE "demand_scenario_A.csv"
--p REF_SPEED "ref_speeds_25zones.csv"  &
+-p DEMAND_FILE "demand_scenario_A.csv" \
+-p REF_SPEED "ref_speeds_25zones.csv" &
 
 case="COSTH6"
 alpha=0.2
@@ -86,7 +86,7 @@ echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${alpha}_SCN
 -p CO_TD ${td} \
 -p DISTANCE_CONTROL ${distance} \
 -p FILE "manhattan_grid_5X5_scenario_A.xml" \
--p DEMAND_FILE "demand_scenario_A.csv"
+-p DEMAND_FILE "demand_scenario_A.csv" \
 -p REF_SPEED "ref_speeds_25zones.csv" &"
 IT=$((IT+1))
 papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${alpha}_SCNAD${distance}K${kp}.ipynb \
@@ -100,7 +100,7 @@ papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${alpha}_SCNAD${di
 -p CO_TD ${td} \
 -p DISTANCE_CONTROL ${distance} \
 -p FILE "manhattan_grid_5X5_scenario_A.xml" \
--p DEMAND_FILE "demand_scenario_A.csv" 
+-p DEMAND_FILE "demand_scenario_A.csv" \
 -p REF_SPEED "ref_speeds_25zones.csv" &
 
 case="COSTN6"
@@ -117,7 +117,7 @@ echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${alpha}_SCN
 -p CO_TD ${td} \
 -p DISTANCE_CONTROL ${distance} \
 -p FILE "manhattan_grid_5X5_scenario_A.xml" \
--p DEMAND_FILE "demand_scenario_A.csv" 
+-p DEMAND_FILE "demand_scenario_A.csv" \
 -p REF_SPEED "ref_speeds_25zones.csv" &"
 IT=$((IT+1))
 papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${alpha}_SCNAD${distance}K${kp}.ipynb \
@@ -131,8 +131,8 @@ papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${alpha}_SCNAD${di
 -p CO_TD ${td} \
 -p DISTANCE_CONTROL ${distance} \
 -p FILE "manhattan_grid_5X5_scenario_A.xml" \
--p DEMAND_FILE "demand_scenario_A.csv"
--p REF_SPEED "ref_speeds_25zones.csv"  &
+-p DEMAND_FILE "demand_scenario_A.csv" \
+-p REF_SPEED "ref_speeds_25zones.csv" &
 
 # Scenario B
 
@@ -154,7 +154,7 @@ echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${alpha}_SCN
 -p CO_TD ${td} \
 -p DISTANCE_CONTROL ${distance} \
 -p FILE "manhattan_grid_5X5_scenario_B.xml" \
--p DEMAND_FILE "demand_scenario_B.csv" 
+-p DEMAND_FILE "demand_scenario_B.csv" \
 -p REF_SPEED "ref_speeds_25zones.csv" &"
 IT=$((IT+1))
 papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${alpha}_SCNBD${distance}K${kp}.ipynb \
@@ -168,7 +168,8 @@ papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${alpha}_SCNBD${di
 -p CO_TD ${td} \
 -p DISTANCE_CONTROL ${distance} \
 -p FILE "manhattan_grid_5X5_scenario_B.xml" \
--p DEMAND_FILE "demand_scenario_B.csv" &
+-p DEMAND_FILE "demand_scenario_B.csv" \
+-p REF_SPEED "ref_speeds_25zones.csv" &
 
 case="COSTN4"
 alpha=0.2
@@ -184,7 +185,7 @@ echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${alpha}_SCN
 -p CO_TD ${td} \
 -p DISTANCE_CONTROL ${distance} \
 -p FILE "manhattan_grid_5X5_scenario_B.xml" \
--p DEMAND_FILE "demand_scenario_B.csv" 
+-p DEMAND_FILE "demand_scenario_B.csv" \
 -p REF_SPEED "ref_speeds_25zones.csv" &"
 IT=$((IT+1))
 papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${alpha}_SCNBD${distance}K${kp}.ipynb \
@@ -198,7 +199,8 @@ papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${alpha}_SCNBD${di
 -p CO_TD ${td} \
 -p DISTANCE_CONTROL ${distance} \
 -p FILE "manhattan_grid_5X5_scenario_B.xml" \
--p DEMAND_FILE "demand_scenario_B.csv" &
+-p DEMAND_FILE "demand_scenario_B.csv" \
+-p REF_SPEED "ref_speeds_25zones.csv" &
 
 case="COSTH6"
 alpha=0.2
@@ -214,7 +216,7 @@ echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${alpha}_SCN
 -p CO_TD ${td} \
 -p DISTANCE_CONTROL ${distance} \
 -p FILE "manhattan_grid_5X5_scenario_B.xml" \
--p DEMAND_FILE "demand_scenario_B.csv" 
+-p DEMAND_FILE "demand_scenario_B.csv" \
 -p REF_SPEED "ref_speeds_25zones.csv" &"
 IT=$((IT+1))
 papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${alpha}_SCNBD${distance}K${kp}.ipynb \
@@ -228,7 +230,7 @@ papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${alpha}_SCNBD${di
 -p CO_TD ${td} \
 -p DISTANCE_CONTROL ${distance} \
 -p FILE "manhattan_grid_5X5_scenario_B.xml" \
--p DEMAND_FILE "demand_scenario_B.csv" 
+-p DEMAND_FILE "demand_scenario_B.csv" \
 -p REF_SPEED "ref_speeds_25zones.csv" &
 
 case="COSTN6"
@@ -245,7 +247,7 @@ echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${alpha}_SCN
 -p CO_TD ${td} \
 -p DISTANCE_CONTROL ${distance} \
 -p FILE "manhattan_grid_5X5_scenario_B.xml" \
--p DEMAND_FILE "demand_scenario_B.csv" 
+-p DEMAND_FILE "demand_scenario_B.csv" \
 -p REF_SPEED "ref_speeds_25zones.csv" &"
 IT=$((IT+1))
 papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${alpha}_SCNBD${distance}K${kp}.ipynb \
@@ -259,5 +261,5 @@ papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${alpha}_SCNBD${di
 -p CO_TD ${td} \
 -p DISTANCE_CONTROL ${distance} \
 -p FILE "manhattan_grid_5X5_scenario_B.xml" \
--p DEMAND_FILE "demand_scenario_B.csv" 
+-p DEMAND_FILE "demand_scenario_B.csv" \
 -p REF_SPEED "ref_speeds_25zones.csv" &
