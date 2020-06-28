@@ -573,7 +573,7 @@ class ComputeVanishingControl:
 
             # Total control law
             totalControl = np.clip(
-                G.graph["self"] * localControl - (1 - G.graph["self"]) * neighControl, self.uMin, self.uMax
+                G.graph["self"] * localControl + (1 - G.graph["self"]) * neighControl, self.uMin, self.uMax
             )
         elif self.typeCtr in ("COPD1MOD", "COSTN7"):
             # Changing scaling factors (Alpha does not exist anymore)
@@ -690,7 +690,7 @@ class ComputeVanishingControl:
             else:
                 # Total control law
                 totalControl = np.clip(
-                    G.graph["self"] * localControl - (1 - G.graph["self"]) * neighControl, self.uMin, self.uMax
+                    G.graph["self"] * localControl + (1 - G.graph["self"]) * neighControl, self.uMin, self.uMax
                 )
         else:
             pass
