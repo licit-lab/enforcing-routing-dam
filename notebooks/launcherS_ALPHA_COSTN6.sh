@@ -17,7 +17,7 @@ for k in 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9
 do
     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${k}_SCNAD${distance}K${kp}.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT manhattan_A_V2_3_${distance}_5X5_${case}_${kp}_${td}_${k}_X_X_X \
+    -p EXPERIMENT manhattan_A_V2_3_${distance}_5X5_${case}_${kp}_${td}_${k}_X_X_X_FIX \
     -p CTR_ALG ${case} \
     -p SELFISH ${k} \
     -p KP ${kp} \
@@ -26,11 +26,12 @@ do
     -p CO_TD ${td} \
     -p DISTANCE_CONTROL ${distance} \
     -p FILE "manhattan_grid_5X5_scenario_A.xml" \
-    -p DEMAND_FILE "demand_scenario_A.csv" &"
+    -p DEMAND_FILE "demand_scenario_A.csv"  \
+    -p REF_SPEED "ref_speeds_25zones.csv" &"
     IT=$((IT+1))    
     papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${k}_SCNAD${distance}K${kp}.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT manhattan_A_V2_3_${distance}_5X5_${case}_${kp}_${td}_${k}_X_X_X \
+    -p EXPERIMENT manhattan_A_V2_3_${distance}_5X5_${case}_${kp}_${td}_${k}_X_X_X_FIX \
     -p CTR_ALG ${case} \
     -p SELFISH ${k} \
     -p KP ${kp} \
@@ -39,7 +40,8 @@ do
     -p CO_TD ${td} \
     -p DISTANCE_CONTROL ${distance} \
     -p FILE "manhattan_grid_5X5_scenario_A.xml" \
-    -p DEMAND_FILE "demand_scenario_A.csv" &   
+    -p DEMAND_FILE "demand_scenario_A.csv"  \
+    -p REF_SPEED "ref_speeds_25zones.csv" &   
 done
 
 # Scenario B
@@ -52,7 +54,7 @@ for k in 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9
 do
     echo "papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${k}_SCNBD${distance}K${kp}.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT manhattan_B_V2_3_${distance}_5X5_${case}_${kp}_${td}_${k}_X_X_X \
+    -p EXPERIMENT manhattan_B_V2_3_${distance}_5X5_${case}_${kp}_${td}_${k}_X_X_X_FIX \
     -p CTR_ALG ${case} \
     -p SELFISH ${k} \
     -p KP ${kp} \
@@ -61,11 +63,12 @@ do
     -p CO_TD ${td} \
     -p DISTANCE_CONTROL ${distance} \
     -p FILE "manhattan_grid_5X5_scenario_B.xml" \
-    -p DEMAND_FILE "demand_scenario_B.csv" &"
+    -p DEMAND_FILE "demand_scenario_B.csv"  \
+    -p REF_SPEED "ref_speeds_25zones.csv" &"
     IT=$((IT+1))
     papermill 01_Zone_Control.ipynb 01_Zone_Control_${case}_ALPHA_${k}_SCNBD${distance}K${kp}.ipynb \
     -p PATH_SYMUVIA ${PATH_SYMUVIA} \
-    -p EXPERIMENT manhattan_B_V2_3_${distance}_5X5_${case}_${kp}_${td}_${k}_X_X_X \
+    -p EXPERIMENT manhattan_B_V2_3_${distance}_5X5_${case}_${kp}_${td}_${k}_X_X_X_FIX \
     -p CTR_ALG ${case} \
     -p SELFISH ${k} \
     -p KP ${kp} \
@@ -74,7 +77,8 @@ do
     -p CO_TD ${td} \
     -p DISTANCE_CONTROL ${distance} \
     -p FILE "manhattan_grid_5X5_scenario_B.xml" \
-    -p DEMAND_FILE "demand_scenario_B.csv" &    
+    -p DEMAND_FILE "demand_scenario_B.csv"  \
+    -p REF_SPEED "ref_speeds_25zones.csv" &    
 done
 
 
