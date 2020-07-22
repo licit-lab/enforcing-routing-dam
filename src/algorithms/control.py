@@ -260,6 +260,22 @@ class ComputeVanishingControl:
             # Bound Control
             totalControl = np.clip(control, self.uMin, self.uMax)
 
+        if self.typeCtr == "PN":
+
+            # Compute error
+            normError = np.array([(self.refSpeed[s] - speeds[-1][s]) / self.refSpeed[s] for s in G.nodes])
+
+            # Control
+            control = self.kP * normError
+
+            # Memory Control
+            self.errorSignal.append(normError)
+            self.localU.append(control)
+            self.coopU.append(np.zeros(self.N))
+
+            # Bound Control
+            totalControl = np.clip(control, self.uMin, self.uMax)
+
         elif self.typeCtr == "PI":
 
             # Compute error
