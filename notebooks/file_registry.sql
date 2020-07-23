@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS files;
+GO
+CREATE TABLE files (
+	sim_id IDENTITY(1,1) PRIMARY KEY,
+    grid VARCHAR(160) NOT NULL,
+    gain VARCHAR(160) NOT NULL,
+    scenario VARCHAR(160) NOT NULL,
+    distance FLOAT NOT NULL,
+    filecheck VARCHAR(160) NOT NULL);
+GO
