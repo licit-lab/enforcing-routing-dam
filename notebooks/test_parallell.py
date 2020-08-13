@@ -31,6 +31,7 @@ from sqlite3 import Error
 
 DBNAME = "file_registry.db"
 SQLNAME = "file_registry.sql"
+OUTPUT_FOLDER = os.path.join(os.getcwd(), "..", "data", "results", "mesh30x30")
 
 
 def create_connection(path):
@@ -176,6 +177,16 @@ def retrive_folder_name(case, version: str = VERSION, timeagg: str = TIMEAGG, co
     return
 
 
+def check_case_out(case, results_folder=OUTPUT_FOLDER):
+    """
+        Checks the existance of an output for a simulation
+    """
+    path4grid = PATH_TO_GRID
+    fname = retrive_folder_name(case)
+    path = results_folder + path4grid[case[0]] + fname
+    return os.path.isdir(path) and os.path.exists(path)
+
+
 def find_file(case, path: str = DEFAULT_DATA_PATH):
     """ 
         Return full path name of a case
@@ -300,10 +311,16 @@ if __name__ == "__main__":
     if ("files",) not in read_schema(DBNAME).fetchall():
         create_table()
 
-    process_chunk(chunks[0])
+    UNDNAME = "undone.db"
+    create_db(dbname=UNDNAME)
+    if ("files",) not in read_schema(UNDNAME).fetchall():
+        create_table(UNDNAME)
 
-    # for chunk in chunks:
-    #     process_chunk(chunk)
+    for chunk in chunks:
+        process_chunk(chunk)
+        for case in chunk:
+            if not check_case_out(case):
+                register_simulation(case,UNDNAME)
 
     #   p1 = Process(target=func1)
     #   p1.start()
