@@ -31,7 +31,7 @@ from sqlite3 import Error
 
 DBNAME = "file_registry.db"
 SQLNAME = "file_registry.sql"
-OUTPUT_FOLDER = os.path.join(os.getcwd(), "..", "data", "results", "mesh30x30")
+OUTPUT_FOLDER = os.path.join(os.getcwd(),"..","data","results","mesh30x30","")
 
 
 def create_connection(path):
@@ -172,20 +172,18 @@ def retrive_folder_name(case, version: str = VERSION, timeagg: str = TIMEAGG, co
         timeagg = timeagg
         control = control
         post = "X_X_X"
-        name = (default_pre, scenario, version, timeagg, str(distance), grid, control, str(gain), post)
+        name = (default_pre, scenario, version, timeagg, str(int(distance)), grid, control, str(gain), post)
         return "_".join(name)
     return
 
-
 def check_case_out(case, results_folder=OUTPUT_FOLDER):
     """
-        Checks the existance of an output for a simulation
+        Checks the existence of an output for a simulation
     """
     path4grid = PATH_TO_GRID
     fname = retrive_folder_name(case)
-    path = results_folder + path4grid[case[0]] + fname
+    path = results_folder  + path4grid[case[0]] + fname
     return os.path.isdir(path) and os.path.exists(path)
-
 
 def find_file(case, path: str = DEFAULT_DATA_PATH):
     """ 
@@ -258,12 +256,12 @@ def papermill_task(case):
         Launch a papermill for a specific case
     """
     simparameters = retrieve_sim_parameters(case)
-    # pm.execute_notebook(
-    #     os.path.join(os.getcwd(), simparameters["INPUT_NOTEBOOK"]),
-    #     os.path.join(os.getcwd(), simparameters["OUTPUT_NOTEBOOK"]),
-    #     parameters=simparameters,
-    # )
-    print(simparameters)
+    pm.execute_notebook(
+        os.path.join(os.getcwd(), simparameters["INPUT_NOTEBOOK"]),
+        os.path.join(os.getcwd(), simparameters["OUTPUT_NOTEBOOK"]),
+        parameters=simparameters,
+    )
+    # print(simparameters)
     return
 
 
@@ -289,8 +287,9 @@ def process_chunk(chunk, dbname: str = DBNAME):
     fns = []
     for case in chunk:
         if case not in request_case(case, dbname):
-            # 1. Register simulation (inside paralell)
+	    # 1. Register simulation (inside paralell)
             register_simulation(case, DBNAME)
+            print(case)
             # 2. Append functions
             fns.append(partial(papermill_task, case))
 
@@ -310,7 +309,7 @@ if __name__ == "__main__":
     create_db()
     if ("files",) not in read_schema(DBNAME).fetchall():
         create_table()
-
+        
     UNDNAME = "undone.db"
     create_db(dbname=UNDNAME)
     if ("files",) not in read_schema(UNDNAME).fetchall():
@@ -320,7 +319,8 @@ if __name__ == "__main__":
         process_chunk(chunk)
         for case in chunk:
             if not check_case_out(case):
-                register_simulation(case,UNDNAME)
+                register_simulation(case, UNDNAME)
+                
 
     #   p1 = Process(target=func1)
     #   p1.start()
