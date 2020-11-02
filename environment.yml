@@ -20,7 +20,7 @@ dependencies:
   - networkx=2.4
   - selenium=3.141.0
   - phantomjs=2.1.1
-  - matplotlib=
+  - matplotlib=3.2.1
   - seaborn=0.10.1
   - scipy=1.4.1
   - nodejs=13.13.0
