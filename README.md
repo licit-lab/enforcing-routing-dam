@@ -25,7 +25,7 @@ In order to reproduce the environment setup the environment for reproducibility 
 In order to install run in your command line tool:
 
 ```{bash}
-git clone https://github.com/aladinoster/vanishing-control-out.git
+git clone https://github.com/licit-lab/vanishing-control-out.git
 ```
 Or obtain direct download [here](https://github.com/aladinoster/vanishing-control-out/archive/master.zip). 
 
